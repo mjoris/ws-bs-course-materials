@@ -95,17 +95,17 @@
 						<ul>
 							<li class="fragment">Webscripting 1 = main course (OPO)
 							<li class="fragment" style="margin-top: 1em;">
-								Webscripting 1 = two sub-courses
+								Webscripting 1 = three sub-courses
 								<ul>
-									<li>OLA Clientside Webscripting [JLW272]</li>
-									<li>OLA Serverside Webscripting [JLW322]</li>
+									<li>OLA Webscripting 1 [JLW502] <small>no evaluation</small></li>
+									<li>OLA Lab Clientside Webscripting 1 [JLW510]</li>
+									<li>OLA Lab Serverside Webscripting 1 [JLW511]</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Webscripting1 = 5 ECTS Credits
+								Webscripting 1 = 5 ECTS Credits
 								<ul>
-									<li>OLA Clientside Webscripting: 2/5</li>
-									<li>OLA Serverside Webscripting: 3/5</li>
+									<li>Equal distribution clientside/serverside</li>
 								</ul>
 							</li>
 						</ul>
@@ -115,8 +115,8 @@
 						<h2>Instructors</h2>
 						<ul class="columns">
 							<li class="fragment column column-12" style="text-align: center; font-size: 30px;">
-								<p><img src="assets/00/lecturer_bramus.jpg" height="300" width="300" alt="" title="" /></p>
-								Bram(us) Van Damme<br /><a href="mailto:bramus.vandamme@odisee.be">bramus.vandamme@odisee.be</a>
+								<p><img src="assets/00/mjoris_routeyou.jpg" height="300" width="300" alt="" title="" /></p>
+								Joris Maervoet<br /><a href="mailto:joris.maervoet@odisee.be">joris.maervoet@odisee.be</a>
 							</li>
 							<li class="fragment column column-12" style="text-align: center; font-size: 30px;">
 								<p><img src="assets/00/lecturer_rogier.jpg" height="300" width="300" alt="" title="" /></p>
@@ -134,8 +134,8 @@
 							<li class="fragment" style="margin-top: 1em;">
 								Two blocks
 								<ul>
-									<li>First 6 weeks = Serverside Webscripting (SWS)</li>
-									<li>Last 6 weeks = Clientside Webscripting (CWS)</li>
+									<li>First 6 weeks = Clientside Webscripting (CWS)</li>
+									<li>Last 6 weeks = Serverside Webscripting (SWS)</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
@@ -305,7 +305,7 @@
 							<li class="fragment">
 								A PHP specific IDE
 								<ul>
-									<li>PHPStorm</li>
+									<li>PhpStorm</li>
 									<li>Zend Studio</li>
 									<li>Aptana Studio</li>
 									<li>Netbeans</li>
@@ -335,7 +335,7 @@
 							<li class="fragment" style="margin-top: 1em;">
 								Course Materials
 								<ul>
-									<li>Available on <a href="http://bramus.github.com/ws1-sws-course-materials/">GitHub</a></li>
+									<li>Available on <a href="https://github.com/mjoris/ws1-sws-course-materials">GitHub</a> and <a href="http://allserv.kahosl.be/~joris/ssws1/">allserv</a></li>
 									<li>Feel free to fork and commit improvements/additions</li>
 								</ul>
 							</li>
@@ -343,7 +343,8 @@
 								Assignments
 								<ul>
 									<li>Several tasks grouped into one big assignment</li>
-									<li>To be completed by the end of the week (Sunday, 8PM)</li>
+									<li>To be completed by the start of the next lab <small>last assignment by Sunday, 8PM</small>	</li>
+									<li>No upload = no marks for the assignment</li>
 								</ul>
 							</li>
 						</ul>
@@ -361,7 +362,7 @@
 							<li class="fragment" style="margin-top: 1em;">
 								Clone the repository
 								<pre class="bigger"><code>cd c:\wamp\www
-git clone https://github.com/bramus/ws1-sws-course-materials.git</code></pre>
+git clone https://github.com/mjoris/ws1-sws-course-materials</code></pre>
 
 								<ul><li>Visit your copy at <a href="http://localhost/ws1-sws-course-materials">http://localhost/ws1-sws-course-materials</a></li></ul>
 							</li>
@@ -531,16 +532,16 @@ git pull</code></pre>
 									<li>The example can be linked into a new window/tab</li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">Use &ldquo;Show in script overlay&rdquo; button, or hit CTRL+ENTER</li>
-							<li class="fragment" style="margin-top: 1em;">Click the dark overlay background to close it</li>
+							<li class="fragment">Use &ldquo;Show in script overlay&rdquo; button, or hit CTRL+ENTER</li>
+							<li class="fragment">Click the dark overlay background to close it</li>
 						</ul>
 						<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/00/examples/helloworld.php">&lt;?php
-							echo 'Hello world! The time is now ' . date('Y-m-d H:i:s', time());
-							?&gt;
+   echo 'Hello world! The time is now ' . date('Y-m-d H:i:s', time());
+?&gt;
 						</code></pre></div>
 						<footer>
 							<span class="fragment" style="display: block;">Note: PHP code examples aren't editable</span>
-							<span class="fragment">Beware: PHP code examples don't run on GitHub!</span>
+							<span class="fragment">Beware: PHP code examples don't run without PHP server!</span>
 						</footer>
 					</section>
 
