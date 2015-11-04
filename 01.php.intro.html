@@ -152,16 +152,16 @@
 							<li class="fragment">
 								Current versions:
 								<ul>
-									<li>5.4.33 <em>(*)</em></li>
-									<li>5.5.16</li>
-									<li>5.6.0 <em>(new since August!)</em></li>
+									<li>5.4.44</li>
+									<li>5.5.29</li>
+									<li>5.6.15</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Our code is PHP 5.4+ compliant
 							</li>
 						</ul>
-						<footer class="fragment"><em>(*) Released Sep, 18 2014. The last planned release that contains regular bugfixes. All the consequent 5.4.* releases will contain only security-relevant fixes, for the term of one year.</em></footer>
+						<!-- footer class="fragment"><em>(*) Released Sep, 18 2014. The last planned release that contains regular bugfixes. All the consequent 5.4.* releases will contain only security-relevant fixes, for the term of one year.</em></footer-->
 					</section>
 
 					<section>
@@ -181,7 +181,7 @@
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em">
-								Shipped with most Unix/Linux distributions
+								A <a href="https://en.wikipedia.org/wiki/LAMP_(software_bundle)">LAMP stack</a> is easy to set up with most Linux distributions
 							</li>
 						</ul>
 					</section>
@@ -217,7 +217,8 @@
 							<li class="fragment">
 								From the shell
 								<ul>
-									<li class="fragment">Run <code>php -a</code> to get an interative shell at which you can type in PHP statements
+									<li class="fragment">Run <code>php -a</code> to get an interactive shell at which you can type in PHP statements
+										<small>proper functioning depends on your PHP installation</small>
 										<ul class="fragment">
 											<li>cfr. the MySQL shell where you type in SQL statements (queries)</li>
 											<li>A <code>;</code> ends a statement</li>
@@ -233,6 +234,7 @@ bramus$</span></code></pre></div>
 									</li>
 								</ul>
 							</li>
+						</ul>
 						</section>
 
 					<section>
@@ -262,6 +264,7 @@ bramus$</span></code></pre></div>
 									</li>
 								</ul>
 							</li>
+						</ul>
 						</section>
 
 					<section>
@@ -279,6 +282,7 @@ bramus$</span></code></pre></div>
 										<pre class="bigger"><code>php -S localhost:8080</code></pre>
 										<ul>
 											<li>All PHP files in that folder will be served</li>
+											<li>For testing and demo purposes only!</li>
 										</ul>
 									</li>
 								</ul>
@@ -306,13 +310,13 @@ bramus$</span></code></pre></div>
 <span class="fragment">Interactive shell
 
 php &gt;</span><span class="fragment"> echo 'hello';
-<span class="fragment">hello
+</span><span class="fragment">hello
 php &gt;</span><span class="fragment"> echo('hello');
-<span class="fragment">hello
+</span><span class="fragment">hello
 php &gt;</span><span class="fragment"> print 'hello';
-<span class="fragment">hello
+</span><span class="fragment">hello
 php &gt;</span><span class="fragment"> print('hello');
-<span class="fragment">hello</code></pre>
+</span><span class="fragment">hello</span> </code></pre>
 								<ul>
 									<li class="fragment">The first example is the preferred syntax</li>
 								</ul>
@@ -342,7 +346,7 @@ php &gt;</span><span class="fragment"> echo $a;</span><span class="fragment">
 								Variables are of a certain type
 								<ul>
 									<li>Primitive types: boolean, integer, float <em>(aka double)</em>, string</li>
-									<li>Combined types: Array, Object</li>
+									<li>Combined types: array, object</li>
 									<li>Special types: resource, NULL</li>
 									<li>Pseudo types: mixed, number, callback</li>
 								</ul>
@@ -351,29 +355,52 @@ php &gt;</span><span class="fragment"> echo $a;</span><span class="fragment">
 					</section>
 
 					<section>
-						<h2>Dynamic &amp; Weak typing</h2>
+						<h2>Dynamic &amp; Weak typing (1)</h2>
 						<ul>
 							<li class="fragment">PHP is dynamically typed
 								<ul>
-									<li>When declaring a variable, you cannot specify the type. PHP will <em>guess</em> the data type when assigning a value</li>
+									<li>When &quot;declaring&quot; a variable, you cannot specify the type. Only at runtime, the type of a variable is known.</li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em">PHP is weakly typed
+							<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $a = 3;
+php &gt; echo gettype($a);
+integer
+php &gt; $a = 'Hello';
+php &gt; echo gettype($a);
+string</span></code></pre></div>
+							<li class="fragment">PHP is weakly typed
 								<ul>
-									<li>PHP will adjust the type of a var when a new value is assigned
+									<li>PHP has a preference of converting the type <small>(of an evaluated expression)</small> when it is not appropriate for an operator
 										<ul>
 											<li>This phenomenon is known as <em>implicit type conversion</em> or <em>coercion</em></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
+							<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> echo gettype('12'+'50k') . ('12'+'50k');
+integer62</span></code></pre></div>
 						</ul>
-						<div class="fragment" style="margin-top: 1em"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $a = 3;</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo gettype($a);</span><span class="fragment">
-integer
-php &gt;</span><span class="fragment"> $a = 'Hello';</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo gettype($a);</span><span class="fragment">
-string</span></code></pre></div>
+
+						<!--footer class="fragment"><em>Note: Dynamic and weak typing are typical properties of scripting languages</em></footer-->
+					</section>
+
+					<section>
+						<h2>Dynamic &amp; Weak typing (2)</h2>
+						<ul>
+							<li class="fragment">Dynamic &amp; weak typing give rise to <em>type juggling</em>
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $foo = '0';  // $foo is a string
+php &gt; $foo += 2;   // $foo is now an integer (2)
+php &gt; $foo = $foo + 1.3;  // $foo is now a float (3.3)
+php &gt; $foo = 5 + '10 Little Piggies'; // $foo is an integer (15)
+php &gt; $foo = 5 + '10 Small Pigs';     // $foo is an integer (15)</span></code></pre></div>
+								<ul>
+									<li>Is it <a href="https://www.quora.com/What-is-type-juggling-on-PHP">a feature or a flaw</a>?</li>
+									<li>Use type casting ...</li>
+								</ul>
+							</li>
+
+						</ul>
+
 						<footer class="fragment"><em>Note: Dynamic and weak typing are typical properties of scripting languages</em></footer>
 					</section>
 
@@ -388,10 +415,11 @@ integer
 php &gt;</span><span class="fragment"> $a = (string) $a;</span><span class="fragment">
 php &gt;</span><span class="fragment"> echo gettype($a);</span><span class="fragment">
 string</span></code></pre></div>
+							</li></ul>
 					</section>
 
 					<section>
-						<h2>A few pointers</h2>
+						<h2>A few pointers (1)</h2>
 						<ul>
 							<li class="fragment">
 								PHP is case sensitive
@@ -407,6 +435,12 @@ Notice: Undefined variable: firstname in php shell code on line 1</span></code><
 									</li>
 								</ul>
 							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>A few pointers (2)</h2>
+						<ul>
 							<li class="fragment" style="margin-top: 1em">
 								To concatenate strings, you must use a <code>.</code>
 								<ul>
@@ -417,11 +451,24 @@ php &gt;</span><span class="fragment"> $lastName = 'Van Damme';</span><span clas
 php &gt;</span><span class="fragment"> echo $firstName + ' ' + $lastName;</span><span class="fragment">
 0
 php &gt;</span><span class="fragment"> echo $firstName . ' ' . $lastName;</span><span class="fragment">
-Bramus Van Damme</span>
-</code></pre></div>
+Bramus Van Damme</span></code></pre></div>
 									</li>
 								</ul>
 							</li>
+
+								<li class="fragment">
+									Use square brackets to access the characters of a string
+									<ul>
+										<li>
+											When <code>$word</code> is a string, <code>$word[1]</code> is again a string!
+											<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Joris';</span><span class="fragment">
+php &gt;</span><span class="fragment"> $firstName[0] = 'B';</span><span class="fragment">
+php &gt;</span><span class="fragment"> echo $firstname;</span><span class="fragment">
+Boris</span></code></pre></div>
+										</li>
+									</ul>
+								</li>
+
 						</ul>
 					</section>
 
@@ -506,12 +553,27 @@ php &gt; $arr['FR'] = 'France';
 php &gt; echo $arr['BE'];
 Belgium</code></pre></div>
 							</li>
-							<li class="fragment" style="margin-top: 1em">We call these <em>associative array</em>s</li>
+							<li class="fragment">We call these <em>associative array</em>s</li>
 						</ul>
 					</section>
 
 					<section>
 						<h2>Arrays (4)</h2>
+						<ul>
+							<li class="fragment">You can even mix integer and string keys, but it's bad practice</li>
+							<li class="fragment">Technically speaking there is no difference between sequential and associative arrays in PHP</li>
+							<li class="fragment" style="margin-top: 1em">Internally, an array comes with a hash table index
+								<ul>
+									<li>More space in memory, slower inserts but faster lookups</li>
+									<li>Multifunctional use: array, dictionary, list, set, ...</li>
+								</ul>
+							</li>
+
+						</ul>
+					</section>
+
+					<section>
+						<h2>Arrays (5)</h2>
 						<ul>
 							<li class="fragment">
 								It's possible to declare and initialize an array in one go
@@ -650,7 +712,7 @@ comment
 						<h2>Iterations (1)</h2>
 						<ul>
 							<li class="fragment">
-								Again, same as in Java
+								Same as in Java, except <code>foreach</code>
 								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
 
 	while ($condition) {
@@ -712,8 +774,8 @@ NL = The Netherlands</span></code></pre></div>
 							<li class="fragment">
 								Same as in Java
 								<ul>
-									<li>Relational operators: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
-									<li>Logical operators: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, <code>&amp;</code>, <code>|</code></li>
+									<li>Comparison operators: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+									<li>Logical &amp; bitwise operators: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, <code>&amp;</code>, <code>|</code></li>
 									<li>Post/pre- in/de-crement: <code>$var--</code>, <code>$var++</code>, <code>--$var</code>, <code>++$var</code></li>
 									<li>Math shorthands: <code>+=</code>, <code>*=</code>, &hellip;</li>
 								</ul>
@@ -726,6 +788,462 @@ php &gt; echo ($a == $b) ? 'equal' : 'not equal';
 equal
 php &gt; echo ($a === $b) ? 'equal' : 'not equal';
 not equal</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Comparison and weak typing (1) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+						<table id="types.comparisions-loose" class="doctable table">
+							<caption><strong>Loose comparisons with <em>==</em></strong></caption>
+
+							<thead>
+							<tr>
+								<th> </th>
+								<th><strong><code>TRUE</code></strong></th>
+								<th><strong><code>FALSE</code></strong></th>
+								<th><em>1</em></th>
+								<th><em>0</em></th>
+								<th><em>-1</em></th>
+								<th><em>"1"</em></th>
+								<th><em>"0"</em></th>
+								<th><em>"-1"</em></th>
+								<th><strong><code>NULL</code></strong></th>
+								<th><em>array()</em></th>
+								<th><em>"php"</em></th>
+								<th><em>""</em></th>
+							</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+							<tr>
+								<td style="background: #333"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>1</em></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>0</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>-1</em></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"1"</em></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"0"</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"-1"</em></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><strong><code>NULL</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>array()</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"php"</em></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>""</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+							</tr>
+
+							</tbody>
+
+						</table>
+					</section>
+					<section>
+						<h2>Comparison and weak typing (2)</h2>
+						<table id="type.comparisons-strict" class="doctable table">
+							<caption><strong>Strict comparisons with <em>===</em></strong></caption>
+
+							<thead>
+							<tr>
+								<th> </th>
+								<th><strong><code>TRUE</code></strong></th>
+								<th><strong><code>FALSE</code></strong></th>
+								<th><em>1</em></th>
+								<th><em>0</em></th>
+								<th><em>-1</em></th>
+								<th><em>"1"</em></th>
+								<th><em>"0"</em></th>
+								<th><em>"-1"</em></th>
+								<th><strong><code>NULL</code></strong></th>
+								<th><em>array()</em></th>
+								<th><em>"php"</em></th>
+								<th><em>""</em></th>
+							</tr>
+
+							</thead>
+
+							<tbody class="tbody">
+							<tr>
+								<td style="background: #333"><strong><code>TRUE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>1</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>0</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>-1</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"1"</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"0"</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"-1"</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><strong><code>NULL</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>array()</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>"php"</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+							</tr>
+
+							<tr>
+								<td style="background: #333"><em>""</em></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td><strong><code>FALSE</code></strong></td>
+								<td style="background: #480"><strong><code>TRUE</code></strong></td>
+							</tr>
+
+							</tbody>
+
+						</table>
+					</section>
+
+					<section>
+						<h2>Comparison and weak typing (3)</h2>
+						<ul>
+							<li class="fragment">Good practice: use <code>===</code> and <code>!==</code> to check equality or use casting</li>
+							<li class="fragment" style="margin-top: 1em;">Caution: deal with weak typing and operators such as <code>&lt;</code> and <code>&gt;</code>
+								<ul>
+									<li>Yeps, <code>($a < 5)</code> is true when <code>$a</code> is <code>null</code>. It is even true  when <code>$a</code> is <code>'php'</code></li>
+									<li>When <code>$a</code> can be <code>null</code> or a number, it <em>can</em> be a good practice to write <br><code>(($a !== null) && ($a < 5))</code>  </li>
+								</ul>
 							</li>
 						</ul>
 					</section>
@@ -800,7 +1318,7 @@ not equal</code></pre></div>
 						<h2>Custom functions (1)</h2>
 						<ul>
 							<li class="fragment">
-								Same as in Java
+								Use the keyword <code>function</code> - no types
 								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend1.php">&lt;?php
 
 	// Our chopStringEnd function
@@ -881,6 +1399,85 @@ not equal</code></pre></div>
 						</ul>
 							<footer class="fragment">This way your IDE will tell you which params are needed, what type they need to be, etc.</footer>
 					</section>
+
+
+					<section>
+						<h2>Custom functions (4)</h2>
+						<ul>
+							<li class="fragment">You cannot use <em>function overloading</em></li>
+							<li class="fragment">Meeting the number of arguments is not really a requirement
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend4.php">&lt;?php
+
+	// Our chopStringEnd function
+	function chopStringEnd($str, $len) {
+		if (strlen($str) &lt; $len) {
+			return $str;
+		} else {
+			return substr($str, 0, $len - strlen($str)) . $ending;
+		}
+	}
+
+	// Our variables
+	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
+	$cutoffLength = 40;
+	$endStr	= '...';
+
+	// Go!
+	echo chopStringEnd($origStr, $cutoffLength, $endStr);</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Custom functions (5)</h2>
+						<ul>
+							<li class="fragment">Caution: strings and arrays are also passed by value!
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend5.php">&lt;?php
+	// Our chopStringEnd function
+	function chopStringEnd($str, $len, $ending) {
+		if (strlen($str) &gt; $len) {
+			$str = substr($str, 0, $len - strlen($str)) . $ending;
+		}
+	}
+
+	// Our variables
+	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
+	$cutoffLength = 40;
+	$endStr	= '...';
+
+	// Go!
+	chopStringEnd($origStr, $cutoffLength, $endStr);
+	echo $origStr;</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+							<section>
+						<h2>Custom functions (6)</h2>
+						<ul>
+							<li class="fragment">Unless an &amp; is placed before the function argument
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend6.php">&lt;?php
+	// Our chopStringEnd function
+	function chopStringEnd(&$str, $len, $ending) {
+		if (strlen($str) &gt; $len) {
+			$str = substr($str, 0, $len - strlen($str)) . $ending;
+		}
+	}
+
+	// Our variables
+	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
+	$cutoffLength = 40;
+	$endStr	= '...';
+
+	// Go!
+	chopStringEnd($origStr, $cutoffLength, $endStr);
+	echo $origStr;</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+
+
 				</section>
 
 
@@ -900,7 +1497,7 @@ not equal</code></pre></div>
 	$host = 'http://www.myhost.com/';
 
 	function absUrl($relUrl) {
-		return $host.$relUrl;
+		return $host . $relUrl;
 	}
 
 	echo absUrl('files/uploads/me.jpg');</code></pre></div>
@@ -985,7 +1582,7 @@ files/uploads/me.jpg</code></pre></div>
 					</section>
 
 					<section>
-						<h2>How we can fix this since 2009</h2>
+						<h2>How we can fix this since 2009 <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Since PHP 5.3 it's possible to use the <code>use</code> keyword to inject a variable into a function
@@ -1175,7 +1772,7 @@ array(3) {
 
 
 					<section>
-						<h2>Date Format</h2>
+						<h2>Date Format <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								The <code>$format</code> param needs to be built manually
@@ -1331,7 +1928,7 @@ Argument #3 : baz</code></pre></div>
 					</section>
 
 					<section>
-						<h2>Named CLI Arguments (1)</h2>
+						<h2>Named CLI Arguments (1) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								You can also use named arguments if you want, but it gets a bit tricky
@@ -1358,7 +1955,7 @@ array(3) {
 					</section>
 
 					<section>
-						<h2>Named CLI Arguments (2)</h2>
+						<h2>Named CLI Arguments (2) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Version 2
@@ -1382,7 +1979,7 @@ array(3) {
 					</section>
 
 					<section>
-						<h2>Interactive scripts</h2>
+						<h2>Interactive scripts <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Use <code>readline()</code> to ask for input whilst the script is runnning
@@ -1399,7 +1996,7 @@ Hello Bramus from Vinkt</code></pre></div>
 					</section>
 
 					<section>
-						<h2>STDIN/STDOUT/STDERR (1)</h2>
+						<h2>STDIN/STDOUT/STDERR (1) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								PHP (in CLI mode) automatically opens some <a href="http://php.net/manual/en/features.commandline.io-streams.php">io streams</a>
@@ -1429,7 +2026,7 @@ effarig</code></pre></div>
 					</section>
 
 					<section>
-						<h2>STDIN/STDOUT/STDERR (2)</h2>
+						<h2>STDIN/STDOUT/STDERR (2) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								<code>STDOUT</code>/<code>STDERR</code> = output
@@ -1447,7 +2044,7 @@ stderr world</code></pre></div>
 					</section>
 
 					<section>
-						<h2>Interactive scripts, Revisited</h2>
+						<h2>Interactive scripts, Revisited <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Unfortunately <code>readline()</code> <a href="http://php.net/manual/en/intro.readline.php">isn't available everywhere</a></em>
@@ -1623,6 +2220,8 @@ Zend Engine v2.4.0, Copyright (c) 1998-2013 Zend Technologies</code></pre></div>
 						<h2>Sources</h2>
 						<ul>
 							<li><a href="http://www.bram.us/2012/06/19/php-cli-the-other-sapi/">PHP CLI, the other SAPI</a> by <a href="https://twitter.com/ThijsFeryn">Thijs Feryn</a></li>
+							<li><a href="http://php.net/manual/en/language.types.type-juggling.php">PHP Manual - Type juggling</a></li>
+							<li><a href="http://php.net/manual/en/types.comparisons.php">PHP Manual - PHP type comparison tables</a></li>
 						</ul>
 					</section>
 				</section>
