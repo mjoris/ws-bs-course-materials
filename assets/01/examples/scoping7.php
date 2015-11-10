@@ -1,17 +1,11 @@
 <?php
 
-	$foo = 'foo';
+	error_reporting(E_ALL); // set error reporting on
 
-	$changePassByValue = function($arg) use ($foo) {
-		$foo = 'foobar';
-	};
+	const HOST = 'http://www.myhost.com/';
 
-	$changePassByReference = function($arg) use (&$foo) {
-		$foo = 'foobar';
-	};
+	function absUrl($relUrl) {
+		return HOST . $relUrl;
+	}
 
-	echo $foo . PHP_EOL;
-	$changePassByValue('test');
-	echo $foo . PHP_EOL;
-	$changePassByReference('test');
-	echo $foo . PHP_EOL;
+	echo absUrl('files/uploads/me.jpg');

@@ -1582,7 +1582,7 @@ files/uploads/me.jpg</code></pre></div>
 					</section>
 
 					<section>
-						<h2>How we can fix this since 2009 <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+						<h2>How we can fix this since 2009 (1) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Since PHP 5.3 it's possible to use the <code>use</code> keyword to inject a variable into a function
@@ -1601,6 +1601,31 @@ files/uploads/me.jpg</code></pre></div>
 							</li>
 						</ul>
 						<footer class="fragment">Note: alternative function definition syntax required!</footer>
+					</section>
+					<section>
+						<h2>How we can fix this since 2009 (2) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+						<ul>
+							<li class="fragment">
+								Since PHP 5.3 it's possible to use the <code>const</code> keyword outside classes
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping7.php">&lt;?php
+
+	const HOST = 'http://www.myhost.com/';
+
+	function absUrl($relUrl) {
+		return HOST . $relUrl;
+	}
+
+	echo $absUrl('files/uploads/me.jpg');</code></pre></div>
+							</li>
+							<li class="fragment" style="margin-top: 1em">
+								<code>const</code> works at compile-time; <code>define()</code> works at run-time
+
+							</li>
+							<li class="fragment">
+								With <code>const</code> you get nicer code but it comes with <a href="http://stackoverflow.com/questions/2447791/define-vs-const">more restrictions</a>
+
+							</li>
+						</ul>
 					</section>
 				</section>
 
