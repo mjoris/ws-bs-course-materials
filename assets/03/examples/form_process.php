@@ -44,7 +44,7 @@
 
 
 		// dump $_REQUEST
-		echo '<h2>Contents of $_REQUEST <small>(Do no ever use this!)</small></h2>' . PHP_EOL;
+		echo '<h2>Contents of $_REQUEST <small>(Do not ever use this!)</small></h2>' . PHP_EOL;
 		dump($_REQUEST);
 		echo PHP_EOL . '<hr />' . PHP_EOL;
 

@@ -16,17 +16,17 @@
 
 	// Name sent in
 	if ($name) {
-		echo '<p>Hello ' . htmlentities($name). '</p>';
+		echo '<p>Thank you ' . htmlentities($name). '</p>';
 	}
 
 	// Age sent in
 	else if ($age) {
-		echo '<p>Hello, ' . htmlentities($age). ' year old stranger</p>';
+		echo '<p>Thank you, ' . htmlentities($age). ' year old stranger</p>';
 	}
 
 	// Nothing sent in
 	else {
-		echo '<p>Hello, stranger</p>';
+		echo '<p>Thank you, stranger</p>';
 	}
 
 ?>
