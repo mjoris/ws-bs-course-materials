@@ -83,7 +83,7 @@
 		/**
 		 * Dumps a variable
 		 * @param mixed $var
-		 * @return
+		 * @return void
 		 */
 		function dump($var) {
 			echo '<pre>';
