@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Webscripting1 &mdash; Serverside Webscripting &mdash; 02.client.server</title>
+		<title>Webscripting1 &mdash; Serverside Webscripting &mdash; 02.http.and.the.webserver</title>
 
 		<meta name="description" content="Webscripting1 &mdash; Serverside Webscripting &mdash; 02.client.server">
 		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
@@ -138,10 +138,10 @@
 
 					<section>
 						<h3 class="inverted">Serverside Webscripting 1 <small>[JLW511]</small></h3>
-						<h1>02.client.server</h1>
+						<h1>02.http and the webserver</h1>
 
 						<footer>
-							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> &mdash; Lecturer: <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a></em>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (90&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (10&percnt;)</em>
 						</footer>
 						<script>
 							// Delicously hacky. Look away.
@@ -152,6 +152,73 @@
 
 				</section>
 
+
+				<section>
+					<section>
+						<h2>Datacom background</h2>
+					</section>
+
+					<section>
+						<h2>Remember the OSI model? <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+
+						<p>
+							<figure class="fragment zoomable-20">
+								<img src="assets/02/osi.gif" alt="OSI model" title="OSI model" height="450"  />
+								<figcaption>OSI model, taken from http://homepages.uel.ac.uk/u0313643/photo.htm</figcaption>
+							</figure>
+						</p>
+
+					</section>
+
+					<section>
+						<h2>The protocol stack of web browsing</h2>
+						<ul>
+							<li class="fragment">
+								Which protocols are used when you browse to http://www.ikdoeict.be/ ?
+							</li>
+
+
+								<figure class="fragment zoomable-20">
+									<img src="assets/02/HttpLayers.PNG" alt="HTTP(S) layers" title="HTTP(S) layers" height="200"  />
+									<figcaption>HTTP(S) layers, taken from http://mcheepati.blogspot.be/2012/03/in-which-layer-http-request-works-and.html</figcaption>
+								</figure>
+
+							<li class="fragment" style="font-size: 80%">
+								So the browser shows HTML and pictures, which came out of an HTTP envelope, which has been transported over TCP/IP ...
+							</li>
+							<li class="fragment" style="font-size: 80%">
+								By default TCP port 80/443 is used for HTTP/HTTPS traffic
+							</li>
+
+						</ul>
+					</section>
+
+					<section>
+						<h2>Basic ideas of the next slides</h2>
+						<ul>
+							<li class="fragment">
+								HTTP is the protocol used by web clients and webservers to communicate
+							</li>
+							<li class="fragment">
+								HTTP is a client-server protocol
+							</li>
+							<li class="fragment">
+								A webserver is a <em>program</em> processing (and answering) HTTP requests
+								<ul>
+									<li class="fragment">
+										It can serve files = returning static documents including HTML documents
+									</li>
+									<li class="fragment">
+										It can use a script interpreter to generate (commonly HTML) documents dynamically = SSWS
+									</li>
+
+								</ul>
+							</li>
+
+
+						</ul>
+					</section>
+				</section>
 
 
 				<!-- Client? Server? -->
@@ -268,7 +335,7 @@
 						<h2>Ports &amp; Protocols</h2>
 						<ul>
 							<li class="fragment">
-								A server <strong>listens</strong> onto a specific <strong>port</strong> for incoming requests
+								A server <strong>listens</strong> onto a specific (TCP) <strong>port</strong> for incoming requests
 								<ul>
 									<li>
 										Examples
@@ -466,7 +533,7 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 					</section>
 
 					<section>
-						<h2>Response format (3)</h2>
+						<h2>Response format (3) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Status codes are grouped
@@ -526,7 +593,7 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 					</section>
 
 					<section>
-						<h2>If you're feeling geeky</h2>
+						<h2>If you're feeling geeky <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								As the HTTP protocol runs over TCP and is plaintext, it's possible to <code>telnet</code> to a webserver
@@ -561,7 +628,7 @@ Content-Type: text/html</code></pre></div>
 				<section>
 
 					<section>
-						<h2>Webservers: Serverside scripts</h2>
+						<h2>Webservers and serverside scripts</h2>
 					</section>
 
 					<section>
@@ -657,7 +724,7 @@ Content-Type: text/html</code></pre></div>
 								<ul>
 									<li class="fragment">Based on the extension, the server will process the file before sending it to the client</li>
 									<li class="fragment">
-										PHP has plugins to have a webserver parse a file ending in <code>.php</code> before sending it's output to the client
+										PHP has plugins to have a webserver parse a file ending in <code>.php</code> before sending its output to the client
 										<ul>
 											<li>That way, we can use PHP to generate HTML based on some conditions calculated on the server</li>
 										</ul>
@@ -749,7 +816,7 @@ Content-Type: text/html</code></pre></div>
 					</section>
 
 					<section>
-						<h2>Parsing Files (2)</h2>
+						<h2>Parsing Files (2) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 
 						<ul>
 							<li class="fragment">
