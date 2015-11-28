@@ -94,7 +94,7 @@
 						<h1>04.classes</h1>
 
 						<footer>
-							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> &mdash; Lecturer: <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a></em>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (85&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (15&percnt;)</em>
 						</footer>
 						<script>
 							// Delicously hacky. Look away.
@@ -288,6 +288,64 @@ class Dog extends Animal {
 
 $dog = new Dog('Sparky');
 echo $dog-&gt;doTrick();</code></pre>
+					</section>
+					<section>
+						<h2>Printing objects</h2>
+
+						<pre class="bigger"><code class="language-php" data-overlay-example="assets/04/examples/07.php">&lt;?php
+
+class Weight {
+
+    private $weight;
+	private $unit;
+
+	public function __construct($weight, $unit) {
+		$this-&gt;weight = $weight;
+		$this-&gt;unit = $unit;
+	}
+
+	public function __toString() {
+		return $this-&gt;weight . ' ' . $this-&gt;unit;
+	}
+}
+
+$myWeight = new Weight(82.5, 'kg');
+var_dump($myWeight);
+print_r($myWeight);
+echo($myWeight); // requires magic method __toString(); fatal error otherwise </code></pre>
+					</section>
+
+					<section>
+						<h2>Comparing objects</h2>
+
+						<pre class="bigger"><code class="language-php" data-overlay-example="assets/04/examples/08.php">&lt;?php
+
+class Weight {
+
+    private $weight;
+	private $unit;
+
+	public function __construct($weight, $unit) {
+		$this-&gt;weight = $weight;
+		$this-&gt;unit = $unit;
+	}
+}
+
+$myWeight = new Weight(82.5, 'kg');
+$samePointer = $myWeight;
+$myWeight2 = new Weight(82.5, 'kg');
+$otherWeight = new Weight(11, 'stones');
+
+echo('&lt;br&gt;' . '$myWeight == $myWeight2' . '&lt;br&gt;');
+var_dump($myWeight == $myWeight2);
+echo('&lt;br&gt;' . '$myWeight == $otherWeight' . '&lt;br&gt;');
+var_dump($myWeight == $otherWeight);
+echo('&lt;br&gt;' . '$myWeight === $samePointer' . '&lt;br&gt;');
+var_dump($myWeight === $samePointer);
+echo('&lt;br&gt;' . '$myWeight === $myWeight2' . '&lt;br&gt;');
+var_dump($myWeight === $myWeight2);
+echo('&lt;br&gt;' . '$myWeight === $otherWeight' . '&lt;br&gt;');
+var_dump($myWeight === $otherWeight); </code></pre>
 					</section>
 
 				</section>
