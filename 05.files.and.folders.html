@@ -94,7 +94,7 @@
 						<h1>05.files&amp;folders</h1>
 
 						<footer>
-							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> &mdash; Lecturer: <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a></em>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (90&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (10&percnt;)</a></em>
 						</footer>
 						<script>
 							// Delicously hacky. Look away.
@@ -113,7 +113,7 @@
 					</section>
 
 					<section>
-						<h2>Permissions</h2>
+						<h2>Permissions (1)</h2>
 						<ul>
 							<li class="fragment">
 								In order to manipulate files/folders, the webserver needs permission to do so
@@ -125,6 +125,31 @@
 											<div class="column column-12"><img src="assets/05/windows-simplefilesharing.png" width="240" alt="" title="" class="noborder" /></div>
 											<div class="column column-12"><img src="assets/05/windows-permissions.png" width="240" alt="" title="" class="noborder" /></div>
 										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Permissions (2)</h2>
+						<ul>
+							<li class="fragment">
+								File/folder permission troubleshooting with Apache
+								<ul>
+									<li class="fragment">In many Linux distros:</li>
+									<ul>
+										<li class="fragment">Apache runs with the <code>www-data</code> account (member of the <code>www-data</code> group)</li>
+										<li class="fragment">Check the owner and the associated group of the file/folder (change? <code>chown</code> and <code>chgrp</code>)</li>
+										<li class="fragment">Set permissions with <code>chmod</code></li>
+									</ul>
+									<li class="fragment">
+										Windows
+										<ul>
+											<li class="fragment">Go to Services and check the account associated with the Apache service (default: SYSTEM)</li>
+											<li class="fragment">Set the file/folder permissions for the account or the account's group(s) </li>
+											<li class="fragment">Think about permission inheritance</li>
+										</ul>
 									</li>
 								</ul>
 							</li>
@@ -350,7 +375,7 @@
 					</section>
 
 					<section>
-						<h2>File properties</h2>
+						<h2>File system functions</h2>
 
 						<ul>
 							<li class="fragment">
@@ -430,16 +455,21 @@
 
 						<ul>
 							<li class="fragment">
-								Suppress errors with <code>@</code> and stop the process when neccessary
+								Suppress errors with <code>@</code> and handle return values (for example within a function: return)
 								<pre class="bigger"><code class="language-php" data-overlay-example="assets/05/examples/dirread.php">&lt;?php
 
 	$myBaseDir	= __DIR__;
-	$dp = @opendir($myBaseDir) or die('Error reading ' . $myBaseDir);
-
-	...</code></pre>
+	$dp = @opendir($myBaseDir);
+    if ($dp !== false) {
+        // read base directory
+        ...
+        closedir($dp);
+    } else {
+        echo ('Error reading ' . $myBaseDir);
+    }</code></pre>
 							</li>
 						</ul>
-						<footer class="fragment">Best practice: always place an <code>@</code> before functions that deal with files/folders</footer>
+						<footer class="fragment" style="line-height: 1.2em">Best practice: always place an <code>@</code> before functions that can generate an error message (see documentation)</footer>
 					</section>
 
 				</section>
@@ -504,7 +534,7 @@
 
 	$lines = new SPLFileObject(__DIR__ . '/testfile.txt');
 
-	// Loop through our array, show line and line numbers too.
+	// Loop through the file contents, show line and line numbers too.
 	foreach ($lines as $line_num =&gt; $line) {
 		echo '&lt;strong&gt;#' . $line_num . ':&lt;/strong&gt; ' . $line . '&lt;br /&gt;' . PHP_EOL;
 	}
@@ -516,6 +546,8 @@
 								</ul>
 							</li>
 						</ul>
+						<footer class="fragment" style="line-height: 1.2em">Note 1: looping works because <code>SplFileObject</code> implements the <code>Iterator</code> interface
+							<br>Note 2: if you have other plans with the file: <code>$lines = null;</code> closes the file handle </footer>
 					</section>
 
 					<section>
@@ -584,7 +616,7 @@
 								<ul>
 									<li class="fragment">Looping directories &rarr; <code>DirectoryIterator</code></li>
 									<li class="fragment">Fetching file info &rarr; <code>SplFileInfo</code> and <code>SplFileObject</code></li>
-									<li class="fragment">Reading file contents line by line, Reading CSV files &rarr; <code>SplFileObject</code></li>
+									<li class="fragment">Reading file contents line by line or char by char, Reading CSV files &rarr; <code>SplFileObject</code></li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
