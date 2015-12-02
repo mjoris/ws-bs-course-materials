@@ -657,7 +657,7 @@
 						<ul>
 							<li class="fragment">
 								Example
-								<pre class="bigger"><code class="language-php" data-overlay-example="assets/05/examples/upload.php">&lt;?php
+								<pre ><code class="language-php" data-overlay-example="assets/05/examples/upload.php">&lt;?php
 if (isset($_FILES['avatar'])) {
 
 	echo '&lt;p&gt;Uploaded file: ' . $_FILES['avatar']['name'] . '&lt;/p&gt;';
@@ -679,6 +679,7 @@ if (isset($_FILES['avatar'])) {
 &lt;/form&gt;</code></pre>
 							</li>
 						</ul>
+						<footer class="fragment" style="line-height: 1.2em">Caution:  <code>or die()</code> might sound <em>cool</em>, but is bad practice when it interrupts your HTML doc/syntax  </footer>
 					</section>
 
 					<section>

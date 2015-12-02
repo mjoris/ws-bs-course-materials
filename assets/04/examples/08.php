@@ -18,14 +18,14 @@ $samePointer = $myWeight;
 $myWeight2 = new Weight(82.5, 'kg');
 $otherWeight = new Weight(11, 'stones');
 
-echo('<br>' . '$myWeight == $myWeight2' . '<br>');
+echo('<br>' . '$myWeight == $myWeight2' . '<br/>');
 var_dump($myWeight == $myWeight2);
-echo('<br>' . '$myWeight == $otherWeight' . '<br>');
+echo('<br>' . '$myWeight == $otherWeight' . '<br/>');
 var_dump($myWeight == $otherWeight);
-echo('<br>' . '$myWeight === $samePointer' . '<br>');
+echo('<br>' . '$myWeight === $samePointer' . '<br/>');
 var_dump($myWeight === $samePointer);
-echo('<br>' . '$myWeight === $myWeight2' . '<br>');
+echo('<br>' . '$myWeight === $myWeight2' . '<br/>');
 var_dump($myWeight === $myWeight2);
-echo('<br>' . '$myWeight === $otherWeight' . '<br>');
+echo('<br>' . '$myWeight === $otherWeight' . '<br/>');
 var_dump($myWeight === $otherWeight);
 ?></pre>

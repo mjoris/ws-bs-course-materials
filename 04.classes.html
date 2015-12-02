@@ -192,8 +192,8 @@ BasicClass::staticFunction('O Hi');
 $inst = new BasicClass('foo');
 $inst2 = new BasicClass('bar');
 
-echo $inst::$staticVariable . PHP_EOL;
-echo $inst2::$staticVariable . PHP_EOL;</code></pre>
+echo BasicClass::$staticVariable . PHP_EOL;
+echo BasicClass::$staticVariable . PHP_EOL;</code></pre>
 					</section>
 
 					<section>
@@ -336,15 +336,15 @@ $samePointer = $myWeight;
 $myWeight2 = new Weight(82.5, 'kg');
 $otherWeight = new Weight(11, 'stones');
 
-echo('&lt;br&gt;' . '$myWeight == $myWeight2' . '&lt;br&gt;');
+echo('&lt;br&gt;' . '$myWeight == $myWeight2' . '&lt;br/&gt;');
 var_dump($myWeight == $myWeight2);
-echo('&lt;br&gt;' . '$myWeight == $otherWeight' . '&lt;br&gt;');
+echo('&lt;br&gt;' . '$myWeight == $otherWeight' . '&lt;br/&gt;');
 var_dump($myWeight == $otherWeight);
-echo('&lt;br&gt;' . '$myWeight === $samePointer' . '&lt;br&gt;');
+echo('&lt;br&gt;' . '$myWeight === $samePointer' . '&lt;br/&gt;');
 var_dump($myWeight === $samePointer);
-echo('&lt;br&gt;' . '$myWeight === $myWeight2' . '&lt;br&gt;');
+echo('&lt;br&gt;' . '$myWeight === $myWeight2' . '&lt;br/&gt;');
 var_dump($myWeight === $myWeight2);
-echo('&lt;br&gt;' . '$myWeight === $otherWeight' . '&lt;br&gt;');
+echo('&lt;br&gt;' . '$myWeight === $otherWeight' . '&lt;br/&gt;');
 var_dump($myWeight === $otherWeight); </code></pre>
 					</section>
 

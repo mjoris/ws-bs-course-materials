@@ -19,5 +19,5 @@ BasicClass::staticFunction('O Hi');
 $inst = new BasicClass('foo');
 $inst2 = new BasicClass('bar');
 
-echo $inst::$staticVariable . '<br />' . PHP_EOL;
-echo $inst2::$staticVariable . '<br />' . PHP_EOL;
+echo BasicClass::$staticVariable . '<br />' . PHP_EOL;
+echo BasicClass::$staticVariable . '<br />' . PHP_EOL;
