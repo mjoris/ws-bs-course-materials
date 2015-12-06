@@ -91,7 +91,9 @@
 
 					<section>
 						<h3 class="inverted">Serverside Webscripting 1 <small>[JLW511]</small></h3>
+						<p>Some initial steps towards ...</p>
 						<h1>06.code<br />organization</h1>
+
 
 						<footer>
 							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> &mdash; Lecturer: <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a></em>
@@ -140,6 +142,7 @@
 								</ul>
 							</li>
 						</ul>
+						<footer class="fragment" style="line-height: 1.2em">Note: there is an <code>include_path</code> setting in the php.ini config file</footer>
 					</section>
 
 					<section>
@@ -168,7 +171,7 @@
 						<h2>Include #fail</h2>
 						<ul>
 							<li class="fragment">
-								If an included file does not exist, you'll get a notice
+								If an included file does not exist, you'll get a warning
 								<ul>
 									<li>
 										Contents <code>01c.php</code>
@@ -190,7 +193,7 @@
 						<h2>require &amp; require_once</h2>
 						<ul>
 							<li class="fragment">
-								<code>require</code> does the same as <code>include</code> yet it won't give a notice but will result in a fatal error and stop the process
+								<code>require</code> does the same as <code>include</code> yet it results in a fatal error and stops the process
 								<ul>
 									<li>
 										Contents <code>02.php</code>
@@ -204,8 +207,8 @@
 									</li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">I bet you can guess what <code>require_once</code> does</li>
-							<li class="fragment" style="margin-top: 1em;">
+							<li class="fragment">I bet you can guess what <code>require_once</code> does</li>
+							<li class="fragment">
 								Best practice: always use <code>require</code> or <code>require_once</code> instead of <code>include*</code>
 							</li>
 						</ul>
@@ -302,6 +305,36 @@ define('DB_NAME', 'world');
 					</section>
 
 					<section>
+						<h2>FYI: OO Alternative</h2>
+
+						<ul>
+							<li class="fragment">
+								Create a config class file and use <code>const</code>
+								<pre class="bigger"><code class="language-php">&lt;?php
+class Config {
+  const MAIL_SERVER = 'localhost';
+  const MAIL_PORT = 25;
+  const DB_HOST = 'localhost';
+  const DB_USER = 'root';
+  const DB_PASS = 'Azerty123';
+  const DB_NAME = 'world';
+}
+
+// EOF</code></pre>
+								<ul>
+									<li class="fragment">
+										Include this file everywhere, as the very first file to include and use the defined constants
+									</li>
+									<li class="fragment">
+										However there are <a href="http://stackoverflow.com/questions/2447791/define-vs-const">differences</a> with the <code>define</code> approach
+									</li>
+
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
 						<h2>Recurring Functionality</h2>
 						<ul>
 							<li class="fragment">
@@ -384,17 +417,6 @@ define('DB_NAME', 'world');
 					</section>
 				</section>
 
-
-
-				<!-- Sources -->
-				<section id="sources">
-					<section>
-						<h2>Sources</h2>
-						<ul>
-
-						</ul>
-					</section>
-				</section>
 
 			</div>
 
