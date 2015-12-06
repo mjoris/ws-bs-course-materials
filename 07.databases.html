@@ -747,14 +747,14 @@ $stmt = $db->exec('DELETE FROM inexistent_table WHERE user_id = 10');</code></pr
 									</li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">
+							<li class="fragment">
 								Prepared statements also prevent SQL Injection, but only if
 								<ul>
 									<li class="fragment">
-										You use it properly
+										You use them properly
 									</li>
 									<li class="fragment">
-										You instruct it to disable emulated prepares using <code style="white-space: nowrap; font-size: 70%;">$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</code>
+										You instruct PDO to disable emulated prepares using (<a href="http://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection#12202218" target="_blank">why?</a>) <code style="white-space: nowrap; font-size: 70%;">$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</code>
 										<pre class="bigger"><code class="language-php">// Make Connection
 try {
 	$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS);
