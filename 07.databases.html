@@ -287,7 +287,7 @@
 							<li class="fragment">
 								Connect by creating a new instance of <code>PDO</code> with params:
 								<ol>
-									<li>A <abbr title="Data Source Name">DSN</abbr>, containing the database host, schema, and charset</li>
+									<li>A connection string, containing the database host, schema, and charset</li>
 									<li>The username to use when connecting to the DBMS</li>
 									<li>The password to use when connecting to the DBMS</li>
 								</ol>
@@ -313,6 +313,7 @@
 								Not needed
 								<ul>
 									<li class="fragment">When the script has finished, the variable dies with it</li>
+									<li class="fragment">Unless you're in a PHP process that takes a long time (e.g. a daemon) and <em>really</em> want to disconnect before the end of the script:<br/> set any link to the PDO object to <code>null</code> </li>
 								</ul>
 							</li>
 						</ul>
@@ -722,7 +723,7 @@ $stmt = $db->exec('DELETE FROM inexistent_table WHERE user_id = 10');</code></pr
 								Note
 								<ul>
 									<li class="fragment">
-										Charset must be set on the DSN!
+										Charset must be set in the connection string!
 										<pre class="bigger"><code class="language-php">$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME_FF . ';charset=utf8mb4', DB_USER, DB_PASS);
 </code></pre>
 									</li>
@@ -1138,7 +1139,7 @@ DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;</code></pre>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Don't be too specific when retrieving items after/before a given date. Bad example:
-								<pre class="bigger"><code class="language-php">$stmt = $db->prepare('SELECT * FROM blogposts WHERE publish_date ?');
+								<pre class="bigger"><code class="language-php">$stmt = $db->prepare('SELECT * FROM blogposts WHERE publish_date > ?');
 $stmt->execute(array((new DateTime())->format('Y-m-d H:i:s')));</code></pre>
 								<ul>
 									<li class="fragment">MySQL Query Cache won't cache this</li>
