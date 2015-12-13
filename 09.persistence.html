@@ -230,7 +230,7 @@
 						<h1>09.persistence</h1>
 
 						<footer>
-							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (90&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (10&percnt;)</em>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (85&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (15&percnt;)</em>
 						</footer>
 						<script>
 							// Delicously hacky. Look away.
@@ -774,6 +774,7 @@
 								Only to be used for storing non-critical data such as a color preference for example (personalization)
 							</li>
 						</ul>
+						<footer class="fragment">What if multiple users share the same login/browser?</footer>
 					</section>
 
 
@@ -1056,7 +1057,7 @@ session.cache_limiter = '' // for security reasons: no caching at client</code><
 
 					<section>
 						<h2>Summary</h2>
-						<ul>
+						<ul style="font-size: 90%; line-height: 110%">
 							<li class="fragment">
 								4 ways to persist data between requests
 								<ol>
@@ -1067,13 +1068,48 @@ session.cache_limiter = '' // for security reasons: no caching at client</code><
 								</ol>
 							</li>
 							<li class="fragment">
-								Querystring and Hidden fields not practical when persisting lots of data. Okay for storing small amounts of (non-critical) data.
+								Querystring and Hidden fields not practical when persisting lots of data or sensitive data.
 							</li>
 							<li class="fragment">Cookies are okay for storing (non-critical) data for a longer period of time</li>
-							<li class="fragment">Sessions suggested above all</li>
+							<li class="fragment">It is advisable to store sensitive data server-side. Sessions are excellent in it. Sessions's security (sid hijacking) depends on underlying technologies.
+								Sometimes the visitor's IP is linked to the session...</li>
 						</ul>
+						<footer class="fragment">What about filling out multiple step forms in multiple browser tabs?</footer>
 					</section>
 
+					<section>
+						<h2>Legal issues and privacy</h2>
+						<ul>
+							<li class="fragment">
+								Tracking cookies (&ne; session or functional cookies)
+								<ul>
+									<li class="fragment">
+										On multiple websites: inclusion of ads (or something else) by marketing company
+									</li>
+									<li class="fragment">
+										Upon first encounter: assignment of unique ID in persistent cookie
+									</li>
+									<li class="fragment">
+										Company keeps your personal record for advertisement/profiling and might even sell your record
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Legal issues
+								<ul>
+									<li class="fragment">
+										Belgium: cookie statement obligatory
+									</li>
+									<li class="fragment">
+										The Netherlands: opt-in frame obligatory
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								What about <a href="https://panopticlick.eff.org/">browser fingerprinting</a>? TBC.
+							</li>
+						</ul>
+					</section>
 
 				</section>
 
