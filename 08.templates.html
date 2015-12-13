@@ -328,7 +328,7 @@ class Template {
 	$tpl-&gt;loadTemplate(__DIR__ . '/templates/main.tpl');
 
 </span><span class="fragment">	// render template with our data
-	// @note The template class with automatically prevent XSS for us :-)
+	// @note The template class will automatically prevent XSS for us :-)
 	</span><span class="fragment">echo $tpl-&gt;render(array(
 		'title' =&gt; $title,
 		'user' =&gt; $userName,
@@ -622,7 +622,7 @@ echo $tpl-&gt;render(array(
 {% endfor %}</code></pre>
 							</li>
 						</ul>
-						<footer class="fragment"><em>Beware: tags must be wrapped between <code>{% </code> and <code> %}</code></em></footer>
+						<footer class="fragment"><em>Beware: tags must be wrapped between <code>{% </code> and <code> %}</code></em> (twig code block)</footer>
 					</section>
 
 					<section>
@@ -750,7 +750,7 @@ $twig = new Twig_Environment($loader, array(
 	'auto_reload' =&gt; true // set to false on production
 ));</code></pre>
 								<ul>
-									<li>When caching is enabled, Twig will save compiled PHP code of the template for faster use (<a href="http://twig.sensiolabs.org/doc/internals.html#the-compiler">example</a>)</li>
+									<li>When caching is enabled, Twig will save compiled PHP code (<a href="http://twig.sensiolabs.org/doc/internals.html#the-compiler">example</a>) of the template for faster use</li>
 								</ul>
 
 							</li>

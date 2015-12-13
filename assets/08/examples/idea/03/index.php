@@ -13,7 +13,7 @@
 	$tpl->loadTemplate(__DIR__ . '/templates/main.tpl');
 
 	// render template with our data
-	// @note The template class with automatically prevent XSS for us :-)
+	// @note The template class will automatically prevent XSS for us :-)
 	echo $tpl->render(array(
 		'title' => $title,
 		'user' => $userName,
