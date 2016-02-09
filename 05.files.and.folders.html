@@ -658,7 +658,7 @@
 							<li class="fragment">
 								Example
 								<pre ><code class="language-php" data-overlay-example="assets/05/examples/upload.php">&lt;?php
-if (isset($_FILES['avatar'])) {
+if (isset($_FILES['avatar']) &amp;&amp; ($_FILES['avatar']['error'] === UPLOAD_ERR_OK)) {
 
 	echo '&lt;p&gt;Uploaded file: ' . $_FILES['avatar']['name'] . '&lt;/p&gt;';
 	echo '&lt;p&gt;Temp location: ' . $_FILES['avatar']['tmp_name'] . '&lt;/p&gt;';
@@ -670,7 +670,7 @@ if (isset($_FILES['avatar'])) {
 
 	@move_uploaded_file($_FILES['avatar']['tmp_name'], __DIR__ . DIRECTORY_SEPARATOR . $_FILES['avatar']['name']) or die('&lt;p&gt;Error while saving file in the uploads folder&lt;/p&gt;');
 
-	echo '&lt;p&gt;&lt;img src=' . $_FILES['avatar']['name'] . ' alt=&quot;&quot; /&gt;&lt;p&gt;';
+	echo '&lt;p&gt;&lt;img src="' . $_FILES['avatar']['name'] . '" alt=&quot;&quot; /&gt;&lt;p&gt;';
 }
 
 ?&gt;

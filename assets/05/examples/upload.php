@@ -5,8 +5,8 @@
  * @author Bramus Van Damme <bramus.vandamme@odisee.be>
  */
 
-	// a file was uploaded
-	if (isset($_FILES['avatar'])) {
+	// a file has been POSTed (could be empty) and it has been uploaded correctly
+	if (isset($_FILES['avatar']) && ($_FILES['avatar']['error'] === UPLOAD_ERR_OK)) {
 
 		// get file info
 		echo '<p>Uploaded file: ' . $_FILES['avatar']['name'] . '</p>' . PHP_EOL;
@@ -25,7 +25,7 @@
 		) or die('<p>Error while saving file in the uploads folder</p>');
 
 		// show image
-		echo '<p><img src=' . $_FILES['avatar']['name'] . ' alt="" /><p>';
+		echo '<p><img src="' . $_FILES['avatar']['name'] . '" alt="" /><p>';
 	}
 
 ?>
