@@ -180,7 +180,9 @@
 											<li>&ldquo;New&rdquo; CSS3 features</li>
 										</ul>
 									</li>
-									<li class="fragment">Firebug (<a href="https://vimeo.com/6313836">video</a>)</li>
+									<li class="fragment">
+										Developer Tools: Firefox <a href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector">Page Inspector</a>,
+										Chrome <a href="https://developer.chrome.com/devtools">DevTools</a> or alike</li>
 								</ul>
 							</li>
 						</ul>
@@ -213,7 +215,7 @@
 											<li>Basic CRUD Actions <em>(<code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code>)</em></li>
 											<li>Subqueries &amp; Joins <em>(left, right, inner)</em></li>
 											<li>Calculations <em>(numbers, dates, etc.)</em></li>
-											<li>Optimization <em>(<code>EXPLAIN ...</code>)</em></li>
+											<!--li>Optimization <em>(<code>EXPLAIN ...</code>)</em></li-->
 										</ul>
 									</li>
 									<li class="fragment">Basic Administration
@@ -235,13 +237,13 @@
 									Workshop 1
 									<ul>
 										<li>Course Introduction</li>
-										<li>PHP Introduction</li>
+										<li>PHP Basics</li>
 									</ul>
 								</li>
 								<li class="fragment" style="margin-top: 1em;">
 									Workshop 2
 									<ul>
-										<li>Client-Server</li>
+										<li>Webserver and HTTP</li>
 										<li>Forms</li>
 									</ul>
 								</li>
@@ -283,24 +285,26 @@
 							<li class="fragment">
 								Technology
 								<ul>
-									<li>Scripting Language: PHP 5.5</li>
+									<li>Scripting Language: PHP 7.0</li>
 									<li>Databaseserver: MySQL</li>
 									<li>Webserver: Apache or <a href="http://php.net/manual/en/features.commandline.webserver.php">PHP 5.4+'s built-in server</a></li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">
+							<li class="fragment" style="margin-top: 0.5em;">
 								<a href="http://www.wampserver.com/en/">Wampserver</a> (Win) or <a href="http://www.mamp.info/en/">MAMP (Pro)</a> (OS X) recommended
 								<ul>
 									<li class="fragment">Follow <a href="http://helpdesk.ikdoeict.be/index.php?/Knowledgebase/Article/View/11/4/howto-installatieconfiguratie-van-software-wamplamp-stack">these instructions</a> to configure your install</li>
-									<li class="fragment">Be sure to add the PHP binary to your system's <code>PATH</code>
+									<li class="fragment">Make sure PHP version 7 is selected in the WampManager menu</li>
+									<li class="fragment">Be sure to add the PHP binary to your system's <code>PATH</code> *
 										<ul>
 											<li>Windows: Add <code>C:\wamp\bin\php\<em>version</em>\</code> to <code>PATH</code> via Computer Settings</li>
 											<li>OS X: Paste this on the Terminal: <code>echo 'export PATH=/Applications/MAMP/bin/php/php<em>version</em>/bin/:$PATH' &gt;&gt; ~/.bash_profile</code></li>
 										</ul>
-									</li>
+									</li>						
 								</ul>
 							</li>
 						</ul>
+						<footer class="fragment"><em>* the first lab session we will only use PHP CLI and no webserver</em></footer>
 					</section>
 
 					<section>
@@ -309,7 +313,7 @@
 							<li class="fragment">
 								A PHP specific IDE
 								<ul>
-									<li>PhpStorm</li>
+									<li>PhpStorm: Odisee students have a free license</li>
 									<li>Zend Studio</li>
 									<li>Aptana Studio</li>
 									<li>Netbeans</li>
@@ -339,7 +343,7 @@
 							<li class="fragment" style="margin-top: 1em;">
 								Course Materials
 								<ul>
-									<li>Available on <a href="https://github.com/mjoris/ws1-sws-course-materials">GitHub</a> and <a href="http://allserv.kahosl.be/~joris/ssws1/">allserv</a></li>
+									<li>Available on <a href="https://github.com/mjoris/ws-bs-course-materials">GitHub</a> <!--and <a href="http://allserv.kahosl.be/~joris/ssws1/">allserv</a--></li>
 									<li>Feel free to fork and commit improvements/additions</li>
 								</ul>
 							</li>
@@ -347,8 +351,9 @@
 								Assignments
 								<ul>
 									<li>Several tasks grouped into one big assignment</li>
-									<li>To be completed by the start of the next lab <small>last assignment by Sunday, 8PM</small>	</li>
-									<li>No upload = no marks for the assignment</li>
+									<li>Upload at the end of the lab</li>
+									<li>To be completed by the start of the next lab <!--small>last assignment by Sunday, 8PM</small-->	</li>
+									<!--li>No upload = no marks for the assignment</li-->
 								</ul>
 							</li>
 						</ul>
@@ -366,13 +371,13 @@
 							<li class="fragment" style="margin-top: 1em;">
 								Clone the repository
 								<pre class="bigger"><code>cd c:\wamp\www
-git clone https://github.com/mjoris/ws1-sws-course-materials</code></pre>
+git clone https://github.com/mjoris/ws-bs-course-materials</code></pre>
 
-								<ul><li>Visit your copy at <a href="http://localhost/ws1-sws-course-materials">http://localhost/ws1-sws-course-materials</a></li></ul>
+								<ul><li>Visit your copy at <a href="http://localhost/ws1-sws-course-materials">http://localhost/ws-bs-course-materials</a></li></ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Update the repository regularly to get the latest version
-								<pre class="bigger"><code>cd c:\wamp\www\ws1-sws-course-materials
+								<pre class="bigger"><code>cd c:\wamp\www\ws-bs-course-materials
 git reset --hard
 git pull</code></pre>
 							</li>
@@ -386,8 +391,8 @@ git pull</code></pre>
 							<li class="fragment">
 								Permanent (50%)
 								<ul>
-									<li>15%: Small test (5 questions) before start of a hands-on lab</li>
-									<li>35%: Progress, Accuracy, Attitude, Programming Style, ...</li>
+									<li>20%: Small test (5 questions) before start of a hands-on lab</li>
+									<li>30%: Progress, Accuracy, Programming Style, &hellip;</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
@@ -418,7 +423,7 @@ git pull</code></pre>
 				<section>
 
 					<section>
-						<h2>Slidedeck?!</h2>
+						<h2>Slidedeck?! <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<p><img src="assets/00/futurama_kwanza.png" alt="" title="" height="376" width="500" /></p>
 						<footer><em>(press the down key)</em></footer>
 					</section>
