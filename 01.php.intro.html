@@ -147,21 +147,158 @@
 
 					<section>
 						<h2>PHP Versions</h2>
+						
+							<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 850 198" width="850" height="198" style="background-color: #fff;">
+							<style type="text/css">
+								<![CDATA[
+								
+									text {
+										fill: #333;
+										font-family: 'Lato', Helvetica, Arial, sans-serif;
+										font-size: 16px;
+									}
 
+									g.eol rect,
+									.branches rect.eol {
+										fill: #f33;
+									}
+
+									g.eol text {
+										fill: white;
+									}
+
+									g.security rect,
+									.branches rect.security {
+										fill: #f93;
+									}
+
+									g.stable rect,
+									.branches rect.stable {
+										fill: #9c9;
+									}
+
+									.branch-labels text {
+										alignment-baseline: central;
+										text-anchor: middle;
+									}
+
+									.today line {
+										stroke: #f33;
+										stroke-dasharray: 7,7;
+										stroke-width: 3px;
+									}
+
+									.today text {
+										fill: #f33;
+										text-anchor: middle;
+									}
+
+									.years line {
+										stroke: black;
+									}
+
+									.years text {
+										text-anchor: middle;
+									}
+								]]>
+							</style>
+
+							<!-- Branch labels -->
+							<g class="branch-labels">
+											<g class="eol">
+										<rect x="0" y="24" width="40" height="30" />
+										<text x="20" y="39">
+											5.3				</text>
+									</g>
+											<g class="eol">
+										<rect x="0" y="54" width="40" height="30" />
+										<text x="20" y="69">
+											5.4				</text>
+									</g>
+											<g class="eol">
+										<rect x="0" y="84" width="40" height="30" />
+										<text x="20" y="99">
+											5.5				</text>
+									</g>
+											<g class="stable">
+										<rect x="0" y="114" width="40" height="30" />
+										<text x="20" y="129">
+											5.6				</text>
+									</g>
+											<g class="stable">
+										<rect x="0" y="144" width="40" height="30" />
+										<text x="20" y="159">
+											7.0				</text>
+									</g>
+									</g>
+
+							<!-- Branch blocks -->
+							<g class="branches">
+														<rect class="stable" x="80" y="24" width="62.753258131639" height="30" />
+									<rect class="security" x="142.75325813164" y="24" width="131.09188478808" height="30" />
+														<rect class="stable" x="80" y="54" width="204.03022670025" height="30" />
+									<rect class="security" x="284.03022670025" y="54" width="116.30708575183" height="30" />
+														<rect class="stable" x="135.85368524806" y="84" width="246.41331727084" height="30" />
+									<rect class="security" x="382.26700251889" y="84" width="123.86376081481" height="30" />
+														<rect class="stable" x="278.44485817545" y="114" width="281.23973277845" height="30" />
+									<rect class="security" x="559.68459095389" y="114" width="239.84229547695" height="30" />
+														<rect class="stable" x="430.23546161428" y="144" width="240.17084656664" height="30" />
+									<rect class="security" x="670.40630818092" y="144" width="119.92114773847" height="30" />
+									</g>
+
+							<!-- Year lines -->
+							<g class="years">
+											<line x1="80" y1="24" x2="80" y2="174" />
+									<text x="80" y="19.2">
+										1 Jan 2013			</text>
+											<line x1="199.92114773847" y1="24" x2="199.92114773847" y2="174" />
+									<text x="199.92114773847" y="19.2">
+										1 Jan 2014			</text>
+											<line x1="319.84229547695" y1="24" x2="319.84229547695" y2="174" />
+									<text x="319.84229547695" y="19.2">
+										1 Jan 2015			</text>
+											<line x1="439.76344321542" y1="24" x2="439.76344321542" y2="174" />
+									<text x="439.76344321542" y="19.2">
+										1 Jan 2016			</text>
+											<line x1="560.01314204359" y1="24" x2="560.01314204359" y2="174" />
+									<text x="560.01314204359" y="19.2">
+										1 Jan 2017			</text>
+											<line x1="679.93428978206" y1="24" x2="679.93428978206" y2="174" />
+									<text x="679.93428978206" y="19.2">
+										1 Jan 2018			</text>
+											<line x1="799.85543752053" y1="24" x2="799.85543752053" y2="174" />
+									<text x="799.85543752053" y="19.2">
+										1 Jan 2019			</text>
+									</g>
+
+							<!-- Today -->
+							<g class="today">
+										<line x1="533.72905486803" y1="24" x2="533.72905486803" y2="174" />
+								<text x="540" y="193.2">
+									Today</text>
+							</g>
+						</svg>
+						<div> 
+							<small>
+								<span style="background: #9c9;color: #333;">&nbsp;Active support&nbsp;</span> &nbsp;
+								<span style="background: #f93;color: #333;">&nbsp;Security fixes only&nbsp;</span> &nbsp;
+								<span style="background: #f33;color: #fff;">&nbsp;End of life&nbsp;</span> 		&nbsp;						
+							</small>
+						</div>
 						<ul>
+
 							<li class="fragment">
 								Current versions:
 								<ul>
-									<li>5.4.44</li>
-									<li>5.5.29</li>
-									<li>5.6.15</li>
+									<li>5.6.26</li>
+									<li>7.0.11</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Our code is PHP 5.4+ compliant
+								Our code is PHP 5.6+ compliant
 							</li>
 						</ul>
-						<!-- footer class="fragment"><em>(*) Released Sep, 18 2014. The last planned release that contains regular bugfixes. All the consequent 5.4.* releases will contain only security-relevant fixes, for the term of one year.</em></footer-->
+						
 					</section>
 
 					<section>
@@ -172,6 +309,7 @@
 								<ul>
 									<li>Install one of these for this course</li>
 									<li>Follow <a href="http://helpdesk.ikdoeict.be/index.php?/Knowledgebase/Article/View/11/0/howto-installatieconfiguratie-van-software-wamplamp-stack">these instructions</a> afer installation</li>
+									<li class="fragment">Make sure PHP version 7 is selected in the WampManager menu</li>
 									<li>Be sure to add the PHP binary to your system's <code>PATH</code>
 										<ul>
 											<li>Windows: Add <code>C:\wamp\bin\php\<em>version</em>\</code> to <code>PATH</code> via Computer Settings</li>
@@ -190,7 +328,7 @@
 						<h2>Obtaining PHP: Manual</h2>
 						<ul>
 							<li class="fragment">
-								PHP can be downloaded from <a href="http://php.net">http://php.net</a>.
+								PHP can be downloaded from <a href="http://php.net/download-docs.php">http://php.net</a>.
 								<ul>
 									<li>Just extract the <code>.zip</code> onto your filesystem and you're good to go</li>
 									<li>Windows users must download from <a href="http://windows.php.net/">http://windows.php.net/</a></li>
@@ -211,14 +349,45 @@
 						</ul>
 					</section>
 
+
+
 					<section>
 						<h2>Running PHP (1)</h2>
 						<ul>
-							<li class="fragment">
+							<li>
 								From the shell
 								<ul>
+									<li class="fragment">
+										Run <code>php -r &quot;<em>one line of PHP code</em>&quot;</code> to run a single line of PHP code
+										<div class="fragment"><pre class="bigger"><code class="language-php">bramus$<span class="fragment"> php -r &quot;echo 'hello' . PHP_EOL;&quot;</span>
+<span class="fragment">hello
+bramus$</span></code></pre></div>
+									</li>
+									<li class="fragment">
+										Run <code>php <em>file.php</em></code> to &ldquo;execute&rdquo; a file that contains PHP code
+										<ul class="fragment">
+											<li>You must wrap your PHP code between <code>&lt;?php</code> and <code>?&gt;</code></li>
+											<li>The closing <code>?&gt;</code> is optional.</li>
+										</ul>
+										<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	echo 'hello' . PHP_EOL;
+?&gt;</code></pre></div>
+<div class="fragment"><pre class="bigger"><code class="language-php">bramus$<span class="fragment"> php cli-example.php</span>
+<span class="fragment">hello
+bramus$</span></code></pre></div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Running PHP (2)</h2>
+						<ul>
+							<li class="fragment">
+								From the shell <em>(continued)</em>
+								<ul>
 									<li class="fragment">Run <code>php -a</code> to get an interactive shell at which you can type in PHP statements
-										<small>proper functioning depends on your PHP installation</small>
 										<ul class="fragment">
 											<li>cfr. the MySQL shell where you type in SQL statements (queries)</li>
 											<li>A <code>;</code> ends a statement</li>
@@ -235,38 +404,9 @@ bramus$</span></code></pre></div>
 								</ul>
 							</li>
 						</ul>
-						</section>
-
-					<section>
-						<h2>Running PHP (2)</h2>
-						<ul>
-							<li>
-								From the shell <em>(continued)</em>
-								<ul>
-									<li class="fragment">
-										Run <code>php -r &quot;<em>one line of PHP code</em>&quot;</code> to run a single line of PHP code
-										<div class="fragment"><pre class="bigger"><code class="language-php">bramus$<span class="fragment"> php -r &quot;echo 'hello' . PHP_EOL;&quot;</span>
-<span class="fragment">hello
-bramus$</span></code></pre></div>
-									</li>
-									<li class="fragment">
-										Run <code>php [-f] <em>file.php</em></code> to &ldquo;execute&rdquo; a file that contains PHP code
-										<ul class="fragment">
-											<li>You must wrap your PHP code between <code>&lt;?php</code> and <code>?&gt;</code></li>
-											<li>The closing <code>?&gt;</code> is optional.</li>
-										</ul>
-										<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
-	echo 'hello' . PHP_EOL;
-?&gt;</code></pre></div>
-<div class="fragment"><pre class="bigger"><code class="language-php">bramus$<span class="fragment"> php cli-example.php</span>
-<span class="fragment">hello
-bramus$</span></code></pre></div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						</section>
-
+						<footer class="fragment"><em>Note: the interactive shell doesn't work properly on any installation</em></footer>
+					</section>					
+					
 					<section>
 						<h2>Running PHP (3)</h2>
 						<ul>
@@ -496,7 +636,7 @@ variable: Bramus
 php &gt; echo 'variable: ' . $firstName . PHP_EOL;
 variable: Bramus</code></pre></div>
 								<ul>
-									<li class="fragment">Course convention: always use <code>'</code> to prevent interpolation</li>
+									<li class="fragment">Course convention: use <code>'</code> where possible</li>
 									<li class="fragment">Course convention: always use <code>PHP_EOL</code> instead of <code>&quot;\n&quot;</code></li>
 								</ul>
 							</li>
