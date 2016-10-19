@@ -5,7 +5,7 @@
         if (strlen($str) < $len)
             return $str;
         else
-            return substr($str, 0, $len - strlen($str)) . $ending;
+            return substr($str, 0, $len - strlen($str)) . '---';
     }
 
     // Our variables
