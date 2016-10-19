@@ -493,6 +493,60 @@ php &gt;</span><span class="fragment"> echo $a;</span><span class="fragment">
 							</li>
 						</ul>
 					</section>
+					
+					<section>
+						<h2>A few pointers (1)</h2>
+						<ul>
+							<li class="fragment">
+								PHP is case sensitive
+								<ul>
+									<li>
+										<code>$firstName</code> and <code>$firstname</code> are not the same!
+										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
+php &gt;</span><span class="fragment"> echo $firstName;</span><span class="fragment">
+Bramus
+php &gt;</span><span class="fragment"> echo $firstname;</span><span class="fragment">
+
+Notice: Undefined variable: firstname in php shell code on line 1</span></code></pre></div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>A few pointers (2)</h2>
+						<ul>
+							<li class="fragment" style="margin-top: 1em">
+								To concatenate strings, you must use a <code>.</code>
+								<ul>
+									<li>
+										When using a <code>+</code>, PHP will think you're adding numbers
+										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
+php &gt;</span><span class="fragment"> $lastName = 'Van Damme';</span><span class="fragment">
+php &gt;</span><span class="fragment"> echo $firstName + ' ' + $lastName;</span><span class="fragment">
+0
+php &gt;</span><span class="fragment"> echo $firstName . ' ' . $lastName;</span><span class="fragment">
+Bramus Van Damme</span></code></pre></div>
+									</li>
+								</ul>
+							</li>
+
+								<li class="fragment">
+									Use square brackets to access the characters of a string
+									<ul>
+										<li>
+											When <code>$word</code> is a string, <code>$word[1]</code> is again a string!
+											<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Joris';</span><span class="fragment">
+php &gt;</span><span class="fragment"> $firstName[0] = 'B';</span><span class="fragment">
+php &gt;</span><span class="fragment"> echo $firstname;</span><span class="fragment">
+Boris</span></code></pre></div>
+										</li>
+									</ul>
+								</li>
+
+						</ul>
+					</section>					
 
 					<section>
 						<h2>Dynamic &amp; Weak typing (1)</h2>
@@ -558,59 +612,7 @@ string</span></code></pre></div>
 							</li></ul>
 					</section>
 
-					<section>
-						<h2>A few pointers (1)</h2>
-						<ul>
-							<li class="fragment">
-								PHP is case sensitive
-								<ul>
-									<li>
-										<code>$firstName</code> and <code>$firstname</code> are not the same!
-										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo $firstName;</span><span class="fragment">
-Bramus
-php &gt;</span><span class="fragment"> echo $firstname;</span><span class="fragment">
 
-Notice: Undefined variable: firstname in php shell code on line 1</span></code></pre></div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>A few pointers (2)</h2>
-						<ul>
-							<li class="fragment" style="margin-top: 1em">
-								To concatenate strings, you must use a <code>.</code>
-								<ul>
-									<li>
-										When using a <code>+</code>, PHP will think you're adding numbers <em>(weak typing!)</em>
-										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
-php &gt;</span><span class="fragment"> $lastName = 'Van Damme';</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo $firstName + ' ' + $lastName;</span><span class="fragment">
-0
-php &gt;</span><span class="fragment"> echo $firstName . ' ' . $lastName;</span><span class="fragment">
-Bramus Van Damme</span></code></pre></div>
-									</li>
-								</ul>
-							</li>
-
-								<li class="fragment">
-									Use square brackets to access the characters of a string
-									<ul>
-										<li>
-											When <code>$word</code> is a string, <code>$word[1]</code> is again a string!
-											<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Joris';</span><span class="fragment">
-php &gt;</span><span class="fragment"> $firstName[0] = 'B';</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo $firstname;</span><span class="fragment">
-Boris</span></code></pre></div>
-										</li>
-									</ul>
-								</li>
-
-						</ul>
-					</section>
 
 					<section>
 						<h2>Interpolation</h2>
@@ -704,7 +706,7 @@ Belgium</code></pre></div>
 							<li class="fragment">Technically speaking there is no difference between sequential and associative arrays in PHP</li>
 							<li class="fragment" style="margin-top: 1em">Internally, an array comes with a hash table index
 								<ul>
-									<li>More space in memory, slower inserts but faster lookups</li>
+									<li>More space in memory, slower inserts but faster key lookups</li>
 									<li>Multifunctional use: array, dictionary, list, set, ...</li>
 								</ul>
 							</li>
