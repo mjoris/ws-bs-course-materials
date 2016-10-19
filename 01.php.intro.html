@@ -906,7 +906,14 @@ comment
 	echo $nickName ?: $firstName;</code></pre></div>
 								<ul class="fragment">
 									<li>If <code>$nickName</code> is <em>truthy</em> then it will be outputted. If not <code>$firstName</code> will.</li>
+									<li><code>0</code> is not <em>truthy</em>, neither is <code>'0'</code> (<em>loose comparison</em>, see further) </li>
 								</ul>
+							</li>
+							<li class="fragment">
+								Since PHP 7.0, <code>??</code> applies <a href="http://php.net/manual/en/function.isset.php">isset</a> to the first operand
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+
+	echo $temperature ?? 'unknown';</code></pre></div>
 							</li>
 						</ul>
 					</section>
@@ -984,7 +991,7 @@ NL = The Netherlands</span></code></pre></div>
 								</ul>
 							</li>
 							<li class="fragment">
-								Since PHP4 support for identical operators: check for both type and value to be equal
+								Caution! Identical operators: check for both type and value to be equal
 								<div><pre class="bigger"><code class="language-php">php &gt; $a = 13; // integer
 php &gt; $b = 13.0; // double
 php &gt; echo ($a == $b) ? 'equal' : 'not equal';
@@ -1441,13 +1448,23 @@ not equal</code></pre></div>
 					<section>
 						<h2>Comparison and weak typing (3)</h2>
 						<ul>
-							<li class="fragment">Good practice: use <code>===</code> and <code>!==</code> to check equality or use casting</li>
-							<li class="fragment" style="margin-top: 1em;">Caution: deal with weak typing and operators such as <code>&lt;</code> and <code>&gt;</code>
-								<ul>
-									<li>Yeps, <code>($a < 5)</code> is true when <code>$a</code> is <code>null</code>. It is even true  when <code>$a</code> is <code>'php'</code></li>
-									<li>When <code>$a</code> can be <code>null</code> or a number, it <em>can</em> be a good practice to write <br><code>(($a !== null) && ($a < 5))</code>  </li>
-								</ul>
-							</li>
+							<li class="fragment">Good practice: use <code>===</code> and <code>!==</code> to check equality</li>
+								<div><pre class="bigger"><code class="language-php">php &gt; $temperature = 0;
+php &gt; echo ($temperature == null) ? 'unavailable' : $temperature . '&deg;'; // bad practice
+unavailable
+php &gt; echo ($temperature === null) ? 'unavailable' : $temperature . '&deg;'; // good practice
+0&deg;
+
+php &gt; $temperature = null;
+php &gt; echo ($temperature < 5) ? 'cold' : 'something else'; // bad practice
+cold
+php &gt; echo (($temperature !== null) && ($temperature < 5)) ? 'cold' : 'something else'; // good practice
+something else
+
+php &gt; $productId = '';
+php &gt; echo $productId ?: 'zero, empty or n/a'; // okay if you REALLY know what you're doing
+zero, empty or n/a
+</code></pre></div>
 						</ul>
 					</section>
 
