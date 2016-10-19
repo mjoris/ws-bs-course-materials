@@ -704,7 +704,7 @@ Belgium</code></pre></div>
 						<ul>
 							<li class="fragment">You can even mix integer and string keys, but it's bad practice</li>
 							<li class="fragment">Technically speaking there is no difference between sequential and associative arrays in PHP</li>
-							<li class="fragment" style="margin-top: 1em">Internally, an array comes with a hash table index
+							<li class="fragment" style="margin-top: 1em">Internally, an array comes with a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> index
 								<ul>
 									<li>More space in memory, slower inserts but faster key lookups</li>
 									<li>Multifunctional use: array, dictionary, list, set, ...</li>
@@ -729,6 +729,67 @@ php ( );</code></pre></div>
 							<li class="fragment" style="margin-top: 1em">
 								Since PHP 5.4 this is also possible
 								<div><pre class="bigger"><code class="language-php">php &gt; $arr1 = ['Brussels', 'Ghent', 'Antwerp'];</code></pre></div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>(Un)setting variables</h2>
+						<ul>
+							<li class="fragment">
+								<a href="http://php.net/manual/en/function.isset.php">isset</a> determines wether a variable is set and not null
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $a = 0;
+php &gt; $b = null;
+
+php &gt; var_dump(isset($a));
+bool(true)
+php &gt; var_dump(isset($b));
+bool(false)
+php &gt; var_dump(isset($c)); // does not cause a notice !
+bool(false)
+
+php &gt; $c; // this is nonsense ! You don't set anything at all.
+</code></pre></div>
+							</li>
+							<li class="fragment" style="margin-top: 0.5em">
+								<a href="http://php.net/manual/en/function.unset.php">unset</a> unsets a variable
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $a = 'foo';
+php &gt; unset($a);
+php &gt; echo $a;
+
+Notice: Undefined variable: a in php shell code on line 1
+php &gt; var_dump(isset($a));
+bool(false)</code></pre></div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>(Un)setting array elements</h2>
+						<ul>
+							<li class="fragment">
+								You can use <a href="http://php.net/manual/en/function.isset.php">isset</a> or <a href="http://php.net/manual/en/function.array-key-exists.php">array_key_exists</a> to check whether the element exists
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = ['BE' => 'Belgium', 'NL' => null];
+
+php &gt; var_dump(array_key_exists('BE', $arr));
+bool(true)
+php &gt; var_dump(array_key_exists('NL', $arr));
+bool(true)
+php &gt; var_dump(array_key_exists('FR', $arr));
+bool(false)
+php &gt; var_dump(isset($arr['NL']));
+bool(false)
+</code></pre></div>
+							</li>
+							<li class="fragment" style="margin-top: 0.5em">
+								<a href="http://php.net/manual/en/function.unset.php">unset</a> unsets an array element
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array(8, 9, 10);
+php &gt; unset($arr[1]);
+php &gt; echo $arr[1];
+
+Notice: Undefined offset: 1 in php shell code on line 1
+php &gt; echo $arr[2];
+10</code></pre></div>
 							</li>
 						</ul>
 					</section>
