@@ -1,7 +1,8 @@
 <?php
 
 	// Show all errors (for educational purposes)
-	ini_set('error_reporting', E_ALL);
+	error_reporting(E_ALL); // set error reporting on
+    ini_set('display_errors', 'on'); // show the errors on screen
 
 	// Get variables
 	$name = $_GET['name'];
