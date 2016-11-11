@@ -2,7 +2,7 @@
 
 /**
  * Basic file upload example
- * @author Bramus Van Damme <bramus.vandamme@odisee.be>
+ * @author Bramus Van Damme <bramus.vandamme@odisee.be> / Joris Maervoet <joris.maervoet@odisee.be>
  */
 
 	// a file has been POSTed (could be empty) and it has been uploaded correctly
@@ -14,18 +14,20 @@
 		echo '<p>Size: ' . $_FILES['avatar']['size'] . '</p>' . PHP_EOL;
 
 		// check file extension
-		if (!in_array((new SplFileInfo($_FILES['avatar']['name']))->getExtension(), array('jpeg', 'jpg', 'png', 'gif'))) {
-			exit('<p>Invalid file extension. Only .jpeg, .jpg, .png or .gif allowed</p>');
+		if (in_array((new SplFileInfo($_FILES['avatar']['name']))->getExtension(), array('jpeg', 'jpg', 'png', 'gif'))) {
+			
+			// store file in this folder
+			$moved = @move_uploaded_file($_FILES['avatar']['tmp_name'], __DIR__ . DIRECTORY_SEPARATOR . $_FILES['avatar']['name']);
+			
+			if ($moved) {
+				// show image
+				echo '<p><img src="' . $_FILES['avatar']['name'] . '" alt="" /><p>';
+			} else {
+				echo('<p>Error while saving file in the uploads folder</p>');
+			}
+		} else {
+			echo('<p>Invalid file extension. Only .jpeg, .jpg, .png or .gif allowed</p>');
 		}
-
-		// store file in this folder
-		@move_uploaded_file(
-			$_FILES['avatar']['tmp_name'],
-			__DIR__ . DIRECTORY_SEPARATOR . $_FILES['avatar']['name']
-		) or die('<p>Error while saving file in the uploads folder</p>');
-
-		// show image
-		echo '<p><img src="' . $_FILES['avatar']['name'] . '" alt="" /><p>';
 	}
 
 ?>

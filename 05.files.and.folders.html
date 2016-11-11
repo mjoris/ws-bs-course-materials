@@ -643,6 +643,9 @@
 						<h2>Handling file uploads (1)</h2>
 						<ul>
 							<li class="fragment">
+								File size (and upload time) are limited by <a href="">several settings</a> in <code>php.ini</code>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
 								Files are uploaded to a temp location. You'll need to move them manually using <code>move_uploaded_file()</code>
 							</li>
 							<li class="fragment">
@@ -664,13 +667,17 @@ if (isset($_FILES['avatar']) &amp;&amp; ($_FILES['avatar']['error'] === UPLOAD_E
 	echo '&lt;p&gt;Temp location: ' . $_FILES['avatar']['tmp_name'] . '&lt;/p&gt;';
 	echo '&lt;p&gt;Size: ' . $_FILES['avatar']['size'] . '&lt;/p&gt;';
 
-	if (!in_array((new SplFileInfo($_FILES['avatar']['name']))-&gt;getExtension(), array('jpeg', 'jpg', 'png', 'gif'))) {
-		exit('&lt;p&gt;Invalid extension. Only .jpeg, .jpg, .png or .gif allowed&lt;/p&gt;');
+	if (in_array((new SplFileInfo($_FILES['avatar']['name']))-&gt;getExtension(), array('jpeg', 'jpg', 'png', 'gif'))) {
+
+		$moved = @move_uploaded_file($_FILES['avatar']['tmp_name'], __DIR__ . DIRECTORY_SEPARATOR . $_FILES['avatar']['name']);
+		if ($moved) {
+			echo '&lt;p&gt;&lt;img src="' . $_FILES['avatar']['name'] . '" alt=&quot;&quot; /&gt;&lt;p&gt;';
+		} else {
+			echo('&lt;p&gt;Error while saving file in the uploads folder&lt;/p&gt;')
+		}
+	} else {
+		echo('&lt;p&gt;Invalid extension. Only .jpeg, .jpg, .png or .gif allowed&lt;/p&gt;');
 	}
-
-	@move_uploaded_file($_FILES['avatar']['tmp_name'], __DIR__ . DIRECTORY_SEPARATOR . $_FILES['avatar']['name']) or die('&lt;p&gt;Error while saving file in the uploads folder&lt;/p&gt;');
-
-	echo '&lt;p&gt;&lt;img src="' . $_FILES['avatar']['name'] . '" alt=&quot;&quot; /&gt;&lt;p&gt;';
 }
 
 ?&gt;
@@ -679,7 +686,7 @@ if (isset($_FILES['avatar']) &amp;&amp; ($_FILES['avatar']['error'] === UPLOAD_E
 &lt;/form&gt;</code></pre>
 							</li>
 						</ul>
-						<footer class="fragment" style="line-height: 1.2em">Caution:  <code>or die()</code> might sound <em>cool</em>, but is bad practice when it interrupts your HTML doc/syntax  </footer>
+						<footer class="fragment" style="line-height: 1.2em">Full reference of <a href="http://php.net/manual/en/features.file-upload.errors.php">upload error codes</a>. <br/>Caution: don't use <code>die()</code>/<code>exit()</code> when it interrupts your HTML doc/syntax.</footer>
 					</section>
 
 					<section>
@@ -687,19 +694,19 @@ if (isset($_FILES['avatar']) &amp;&amp; ($_FILES['avatar']['error'] === UPLOAD_E
 
 						<ul>
 							<li class="fragment">
-								Provide a separate, dedicated folder to store all uploads in
+								Provide a separate, dedicated folder to store all uploads
 								<ul>
 									<li>e.g. <code>files/</code></li>
 									<li>Use subfolders where appropriate, e.g. <code>files/photoalbums/1</code> and <code>files/photoalbums/2</code></li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">
+							<li class="fragment" style="margin-top: 0.5em;">
 								Rename files when moving them to prevent name conflicts
 								<ul>
 									<li> e.g. give photos in photoalbums a sequential name such as <code>1.jpg</code>, <code>2.jpg</code>, etc.</li>
 								</ul>
 							</li>
-							<li class="fragment" style="margin-top: 1em;">
+							<li class="fragment" style="margin-top: 0.5em;">
 								Always limit the allowed file extensions
 								<ul>
 									<li>You don't want one to upload a <code>.php</code> file, right?</li>
