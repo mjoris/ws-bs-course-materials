@@ -2,7 +2,7 @@
 
 	try {
 		$di = new DirectoryIterator('/this/path/does/not/exist');
-	} catch (Exception $e) {
+	} catch (RuntimeException $e) {
 		echo 'There was an error: <br />' . $e->getMessage();
 	}
 

@@ -448,7 +448,7 @@ var_dump($myWeight === $otherWeight); </code></pre>
 					</section>
 
 					<section>
-						<h2>Not talked about</h2>
+						<h2>Not talked about (1)</h2>
 						<ul>
 							<li class="fragment">
 								Interfaces
@@ -459,6 +459,20 @@ var_dump($myWeight === $otherWeight); </code></pre>
 									<li>An interface itself cannot be instantiated</li>
 								</ul>
 							</li>
+							<li class="fragment">
+								Changing the expected behaviour of certain OO aspects
+								<ul class="fragment">
+									<li>The behaviour of inaccessible properties (<code>-&gt;</code>) with <a href="http://php.net/manual/en/language.oop5.overloading.php">property overloading</a></li>
+									<li>Making an object iteratable (<code>foreach</code>) with the <a href="http://php.net/manual/en/class.iterator.php">Iterator interface</a></li>
+									<li>Enabling an object's array access (<code>[]</code>) with the <a href="http://php.net/manual/en/class.arrayaccess.php">ArrayAccess interface</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Not talked about (2)</h2>
+						<ul>
 							<li class="fragment">
 								Multiple Inheritance
 								<ul class="fragment">
@@ -473,8 +487,17 @@ var_dump($myWeight === $otherWeight); </code></pre>
 									<li>Provides a way to group related classes, interfaces, functions and constants</li>
 								</ul>
 							</li>
+							<li class="fragment">
+								<a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration">Type declaration</a>
+								<ul class="fragment">
+									<li>Specify the type (PHP &gt;= 5.0) or class name (PHP &gt;= 7.0) of function parameters</li>
+									<li>Specify the <a href="http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration">return type</a> of a function (PHP &gt;= 7.0)</li>
+									<li>Checks at run-time whether the type matches</li>
+									<li>Generates fatal error (PHP &lt; 7.0) or throws TypeError (PHP &gt;= 7.0)</li>
+								</ul>
+							</li>							
 						</ul>
-					</section>
+					</section>					
 
 				</section>
 
