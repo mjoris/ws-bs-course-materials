@@ -879,15 +879,15 @@ $_COOKIE = array_map('stripPostSlashes', $_COOKIE);
 ...
 &lt;dd class=&quot;text&quot;&gt;&lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; value=&quot;&lt;?php echo isset($_GET['name']) ? htmlentities($_GET['name']) : ''; ?&gt;&quot; class=&quot;input-text&quot; /&gt;&lt;/dd&gt;
 ...</code></pre></div>
-					</section>
+					</section> -->
 
 
 					<section>
-						<h2>Cleaning things up</h2>
+						<h2>Summary of both pitfalls</h2>
 
 						<ul>
 							<li class="fragment">
-								It's much nicer to have a block of code at the top where we fetch all vars and then later on work with those vars
+								Put a block of code at the top where you fetch all vars and then later on work with those vars
 								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/03/examples/persistency_11.php" data-overlay-height="600">&lt;?php
 
 	$name = isset($_GET['name']) ? (string) $_GET['name'] : '';
@@ -902,11 +902,11 @@ $_COOKIE = array_map('stripPostSlashes', $_COOKIE);
 &lt;dd class=&quot;text&quot;&gt;&lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; value=&quot;&lt;?php echo htmlentities($name); ?&gt;&quot; class=&quot;input-text&quot; /&gt;&lt;/dd&gt;
 ...</code></pre></div>
 							</li>
+							<li class="fragment">
+							Always work with the raw variables in your scripts.<br />Only use <code>htmlentities()</code> when outputting it on screen
+							</li>
 						</ul>
-						<footer class="fragment" style="line-height: 1.2;">
-							Note: Always work with the raw variables in your scripts.<br />Only use <code>htmlentities()</code> when outputting it on screen
-						</footer>
-					</section> -->
+					</section>
 
 				</section>
 
@@ -959,7 +959,9 @@ $_COOKIE = array_map('stripPostSlashes', $_COOKIE);
 								</ul>
 							</li>
 						</ul>
+						<footer class="fragment" style="line-height:1;">Note that a user can easily edit the DOM (<code>POST</code>) or URL (<code>GET</code>)</footer>
 					</section>
+
 
 					<section>
 						<h2>How to know if a form was sent? (1)</h2>
