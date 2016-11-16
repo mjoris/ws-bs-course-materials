@@ -175,7 +175,7 @@
 							<li class="fragment">
 								To connect to a MySQL server, 3 extensions exist
 								<ul>
-									<li class="fragment"><code>mysql</code> &mdash; Classic extension, procedural (= based on methods)</li>
+									<li class="fragment"><code><s>mysql</s></code> (removed in PHP 7.0) &mdash; Classic extension, procedural (= based on methods)</li>
 									<li class="fragment"><code>mysqli</code> &mdash; Improved version of the <code>mysql</code> extension. Supports Prepared Statements, Multiple Statements, Transactions, etc. Both OO and procedural</li>
 									<li class="fragment"><code>pdo_mysql</code> &mdash; OO based; Implements <em>PHP Data Objects</em>, an interface to communicating with a database server.</li>
 								</ul>
@@ -198,15 +198,15 @@
 								Extension? &rarr; PDO
 								<ul>
 									<li class="fragment">
-										The <code>mysql</code> and <code>mysqli</code> extensions are outdated
+										The <code><s>mysql</s></code> and <code>mysqli</code> extensions are outdated
 										<ul>
-											<li class="fragment"><code>mysql</code> is procedural. <code>mysqli</code>'s OO form not robust as it clearly was an afterthought</li>
+											<li class="fragment"><code><s>mysql</s></code> is procedural. <code>mysqli</code>'s OO form not robust as it clearly was an afterthought</li>
 										</ul>
 									</li>
 									<li class="fragment">
 										PDO is object oriented
 									</li>
-									<li class="fragment"><code>mysql</code> and <code>mysqli</code> are MySQL only. PDO plays nice with multiple DBMS's such as MSSQL, PostgreSQL, etc.</li>
+									<li class="fragment"><code><s>mysql</s></code> and <code>mysqli</code> are MySQL only. PDO plays nice with multiple DBMS's such as MSSQL, PostgreSQL, etc.</li>
 								</ul>
 							</li>
 						</ul>
@@ -257,7 +257,7 @@
 
 						<ul>
 							<li class="fragment">
-								We'll use a <code>config.php</code> to store our credentials in
+								We'll use a <code>config.php</code> to store our credentials
 
 								<pre class="bigger"><code class="language-php">&lt;?php
 
