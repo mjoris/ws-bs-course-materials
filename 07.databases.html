@@ -287,7 +287,7 @@
 							<li class="fragment">
 								Connect by creating a new instance of <code>PDO</code> with params:
 								<ol>
-									<li>A connection string, containing the database host, schema, and charset</li>
+									<li>A <a href="https://en.wikipedia.org/wiki/Data_source_name">DSN</a> connection string, containing the database host, schema, and charset</li>
 									<li>The username to use when connecting to the DBMS</li>
 									<li>The password to use when connecting to the DBMS</li>
 								</ol>
@@ -754,15 +754,19 @@ $stmt = $db->exec('DELETE FROM inexistent_table WHERE user_id = 10');</code></pr
 										You use them properly
 									</li>
 									<li class="fragment">
-										You instruct PDO to disable emulated prepares using (<a href="http://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection#12202218" target="_blank">why?</a>) <code style="white-space: nowrap; font-size: 70%;">$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</code>
-										<pre class="bigger"><code class="language-php">// Make Connection
-try {
-	$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-} catch (Exception $e) {
-	showDbError('connect', $e->getMessage());
-}</code></pre></li>
+										At least 1 of the following conditions is true (<a href="http://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection#12202218" target="_blank">why?</a>): <small style="background-color: #f00;border-radius: 10px;">FYI</small>
+										<ul>
+											<li class="fragment">
+												MySQL version &ge; 5.5 AND you set the connection encoding charset in the DSN (= not with an SQL query <code class="language-sql">SET NAMES</code>)
+											</li>
+											<li class="fragment">
+												You use a safe connection encoding charset: <code>utf8</code>, <code>utf8mb4</code>, <code>ascii</code>, <code>latin1</code>, &hellip;
+											</li>
+											<li class="fragment">
+												You enable MySQL's <code>NO_BACKSLASH_ESCAPES</code> mode
+											</li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -839,10 +843,6 @@ $stmt->execute(array('bramus-test', 4));</code></pre>
 									<li>More readable code</li>
 									<li><em>One function to rule them all &trade;</em></li>
 								</ul>
-							</li>
-							<li class="fragment" style="margin-top: 1em;">
-								Remember to manually force <strong>real prepared statements</strong>!
-								<pre class="bigger"><code class="language-php">$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</code></pre>
 							</li>
 						</ul>
 
