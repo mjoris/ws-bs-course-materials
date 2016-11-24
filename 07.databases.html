@@ -385,7 +385,7 @@
 
 							<pre class="bigger"><code class="language-php" data-overlay-example="assets/07/examples/02b.php">try {
 	$db = new PDO('mysql:host=' . DB_HOST .';dbname=does_not_exist;charset=utf8mb4', DB_USER, DB_PASS);
-} catch (Exception $e) {
+} catch (PDOException $e) {
 	exit('Could not connect to database server or access database');
 }</code></pre>
 
@@ -417,7 +417,7 @@
 
 	try {
 		$db = new PDO('mysql:host=' . DB_HOST .';dbname=does_not_exist;charset=utf8mb4', DB_USER, DB_PASS);
-	} catch (Exception $e) {
+	} catch (PDOException $e) {
 		showDbError('connect');
 	}
 
@@ -456,7 +456,7 @@
 
 	try {
 		$db = new PDO('mysql:host=' . DB_HOST .';dbname=does_not_exist;charset=utf8mb4', DB_USER, DB_PASS);
-	} catch (Exception $e) {
+	} catch (PDOException $e) {
 		showDbError('connect', $e->getMessage());
 	}</code></pre>
 
@@ -543,7 +543,7 @@ var_dump($stmt);</code></pre>
 								<pre class="bigger"><code class="language-php" data-overlay-example="assets/07/examples/03c.php">try {
 	$db = new PDO('mysql:host=' . DB_HOST .';dbname=' . DB_NAME_FF . ';charset=utf8mb4', DB_USER, DB_PASS);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
+} catch (PDOException $e) {
 	showDbError('connect', $e->getMessage());
 }
 

@@ -6,7 +6,7 @@
 	// Make Connection
 	try {
 		$db = new PDO('mysql:host=' . DB_HOST .';dbname=does_not_exist;charset=utf8mb4', DB_USER, DB_PASS);
-	} catch (Exception $e) {
+	} catch (PDOException $e) {
 		exit('Could not connect to database server or access database');
 	}
 
