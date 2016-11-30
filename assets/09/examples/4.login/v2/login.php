@@ -23,12 +23,8 @@
 		// @note: this will most likely be the result of a query
 		if (($username != '') && ($username === $password)) {
 
-			// store user (usually returned from database) in session
-			$_SESSION['user'] = array(
-				'username' => $username,
-				'id' => 25,
-				'email' => $username . '@odisee.be'
-			);
+			// only store user id (usually returned from database) in session
+			$_SESSION['user_id'] = 25;
 
 			// redirect to index
 			header('location: index.php');

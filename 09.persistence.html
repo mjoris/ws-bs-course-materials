@@ -1028,7 +1028,7 @@ session.cache_limiter = '' // for security reasons: no caching at client</code><
 											<img src="assets/09/login-code.png" class="noborder" width="710" alt="" title="" />
 										</figure>
 
-										<p style="font-size: 75%; margin-top: -1em;"><code>/assets/09/examples/4.login/v1</code> <a href="assets/09/examples/4.login/v1" target="_blank">&rarr;</a></p>
+										<p style="font-size: 75%; margin-top: -1em;">conceptual code sample: <code>/assets/09/examples/4.login/v1</code> <a href="assets/09/examples/4.login/v1" target="_blank">&rarr;</a></p>
 									</div>
 
 									<div class="tooltip">
@@ -1037,6 +1037,34 @@ session.cache_limiter = '' // for security reasons: no caching at client</code><
 											<p>If the login validates, a <code>user</code> object <em>typically the result of a database query</em> is stored in the session, along with the <code>name</code></p>
 											<p>The content pages use a simple <code>if</code> to display the <code>$_SESSION['user']['username']</code> or a request to log in</p>
 											<p>The logout page simply destroys the session and redirects to the index</p>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Code, robust version</h2>
+						<ul>
+							<li class="fragment">
+								Store a single identifier in the session instead of the whole user object
+
+								<div class="hastooltip">
+									<div style="text-align: center">
+										<figure>
+											<img src="assets/09/login-code.png" class="noborder" width="710" alt="" title="" />
+										</figure>
+
+										<p style="font-size: 75%; margin-top: -1em;">conceptual code sample: <code>/assets/09/examples/4.login/v2</code> <a href="assets/09/examples/4.login/v2" target="_blank">&rarr;</a></p>
+									</div>
+
+									<div class="tooltip">
+										<div>
+											<p>If the login validates, the <code>user</code> id <em>typically the result of a database query</em> is stored in the session</p>
+											<p>When a content page needs some user data (e.g. <code>name</code>), this data is retrieved from the database (<code>WHERE id = :id</code>)</p>
+											<p>PRO: This results in more data consistency / safer code e.g. update user info, update access rights</p>
+											<p>CON: more queries = slower web application</p>
 										</div>
 									</div>
 								</div>
