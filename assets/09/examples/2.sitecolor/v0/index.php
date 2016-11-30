@@ -23,9 +23,10 @@
 
 	<p>Change the color of this page!</p>
 
-	<form action="#" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<fieldset>
 			<input type="text" name="color" id="color" value="<?php echo htmlentities($color); ?>" />
+			<input type="hidden" name="moduleAction" value="changeColor" />			
 			<input type="submit" name="btnSubmit" value="Change color" />
 		</fieldset>
 	</form>

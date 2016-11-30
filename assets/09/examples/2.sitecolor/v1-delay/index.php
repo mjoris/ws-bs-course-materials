@@ -1,7 +1,9 @@
 <?php
 
+	$moduleAction = (isset($_POST['moduleAction']) ? $_POST['moduleAction'] : '');
+	
 	// the form was sent, process it
-	if (isset($_POST['btnSubmit'])) {
+	if ($moduleAction == 'changeColor') {
 
 		// @TODO: insert PHP formchecking here!
 
@@ -62,9 +64,10 @@
 
 	<p>Change the color of this page!</p>
 
-	<form action="#" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<fieldset>
 			<input type="text" name="color" id="color" value="<?php echo htmlentities($color); ?>" maxlength="7" />
+			<input type="hidden" name="moduleAction" value="changeColor" />
 			<input type="submit" name="btnSubmit" value="Change color" />
 		</fieldset>
 	</form>
