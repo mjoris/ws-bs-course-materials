@@ -369,7 +369,7 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Querystring = Insecure
+								Querystring = Insecure <small>with authentication / sensitive data</small>
 								<ul>
 									<li class="fragment">Adding a <code>?loggedin=true</code> parameter to the querystring is not secure</li>
 									<li class="fragment">Params may be spoofed</li>
@@ -468,7 +468,7 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Hidden Fields = Insecure
+								Hidden Fields = Insecure <small>with authentication / sensitive data</small>
 								<ul>
 									<li class="fragment">Adding a <code>loggedin=true</code> hidden field is not secure</li>
 									<li class="fragment">Params may be spoofed</li>
@@ -954,14 +954,14 @@ echo '&lt;a href=&quot;nextpage.php?PHPSESSID=' . session_id() . '&quot; title=&
 								<ul>
 									<li class="fragment">Enabled by default</li>
 									<li class="fragment">Easy, since you as a developer don't need to do any extra work</li>
-									<li class="fragment">Disadvantage: inherits all disadvantages that cookies have</li>
+									<li class="fragment">Risk: cookie theft by XSS</li>
 								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Passing the PHPSESSID (2)</h2>
+						<h2>Passing the PHPSESSID (2) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 						<ul>
 							<li class="fragment">
 								Some basic php.ini settings
@@ -984,7 +984,7 @@ session.gc_maxlifetime = 1800</code></pre>
 					</section>
 
 					<section>
-					<h2>Passing the PHPSESSID (3)</h2>
+					<h2>Passing the PHPSESSID (3) <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
 					<ul>
 						<li class="fragment">
 							Example php.ini settings with fall-back scenario and <em>transparent sid support</em>
