@@ -166,6 +166,7 @@ echo BasicClass::CLASS_CONSTANT . PHP_EOL;
 
 $inst = new BasicClass();
 echo $inst-&gt;multiply(3) . PHP_EOL;</code></pre>
+						<footer class="fragment"><em>Note: only since PHP 7.1, constants can be <code>public</code>, <code>protected</code> or <code>private</code></em></footer>
 					</section>
 
 					<section>
@@ -486,18 +487,26 @@ var_dump($myWeight === $otherWeight); </code></pre>
 									<li>Available since PHP 5.3.0</li>
 									<li>Provides a way to group related classes, interfaces, functions and constants</li>
 								</ul>
-							</li>
+							</li>						
+						</ul>
+					</section>
+
+					<section>
+						<h2>Not talked about (3)</h2>
+						<ul>
 							<li class="fragment">
 								<a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration">Type declaration</a>
 								<ul class="fragment">
 									<li>Specify the type (PHP &gt;= 7.0) or class name (PHP &gt;= 5.0) of function parameters</li>
 									<li>Specify the <a href="http://php.net/manual/en/functions.returning-values.php#functions.returning-values.type-declaration">return type</a> of a function (PHP &gt;= 7.0)</li>
+									<li>Support for <a href="http://php.net/manual/en/migration71.new-features.php">void functions and nullable types</a> (PHP &gt;= 7.1)</li>
 									<li>Checks at run-time whether the type matches</li>
 									<li>Generates fatal error (PHP &lt; 7.0) or throws TypeError (PHP &gt;= 7.0)</li>
 								</ul>
 							</li>							
 						</ul>
 					</section>					
+					
 
 				</section>
 

@@ -488,7 +488,7 @@ php &gt;</span><span class="fragment"> echo $a;</span><span class="fragment">
 									<li>Primitive types: boolean, integer, float <em>(aka double)</em>, string</li>
 									<li>Combined types: array, object</li>
 									<li>Special types: resource, NULL</li>
-									<li>Pseudo types: mixed, number, callback</li>
+									<li>Pseudo types: mixed, number, callback, array|object, void, ..., iterable</li>
 								</ul>
 							</li>
 						</ul>
@@ -511,27 +511,6 @@ Notice: Undefined variable: firstname in php shell code on line 1</span></code><
 									</li>
 								</ul>
 							</li>
-						</ul>
-					</section>
-
-					<section>
-						<h2>A few pointers (2)</h2>
-						<ul>
-							<li class="fragment" style="margin-top: 1em">
-								To concatenate strings, you must use a <code>.</code>
-								<ul>
-									<li>
-										When using a <code>+</code>, PHP will think you're adding numbers
-										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
-php &gt;</span><span class="fragment"> $lastName = 'Van Damme';</span><span class="fragment">
-php &gt;</span><span class="fragment"> echo $firstName + ' ' + $lastName;</span><span class="fragment">
-0
-php &gt;</span><span class="fragment"> echo $firstName . ' ' . $lastName;</span><span class="fragment">
-Bramus Van Damme</span></code></pre></div>
-									</li>
-								</ul>
-							</li>
-
 								<li class="fragment">
 									Use square brackets to access the characters of a string
 									<ul>
@@ -546,6 +525,37 @@ Boris</span></code></pre></div>
 								</li>
 
 						</ul>
+						<footer class="fragment"><em>Note: in PHP &ge; 7.1, <strong>negative</strong> string offsets are counted from the end of the string</em></footer>							
+						</ul>
+					</section>
+
+					<section>
+						<h2>A few pointers (2)</h2>
+						<ul>
+							<li class="fragment" style="margin-top: 1em">
+								To concatenate strings, you must use a <code>.</code>
+								<ul>
+									<li>
+										When using a <code>+</code>, PHP will think you're adding numbers
+										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $firstName = 'Bramus';</span><span class="fragment">
+php &gt;</span><span class="fragment"> $lastName = 'Van Damme';</span><span class="fragment">
+php &gt;</span><span class="fragment"> echo $firstName . ' ' . $lastName;</span><span class="fragment">
+Bramus Van Damme
+php &gt;</span><span class="fragment"> echo $firstName + ' ' + $lastName;</span><span class="fragment">
+0</span></code></pre></div>
+									</li>
+								</ul>
+							</li>
+							<footer class="fragment" style="line-height:1;" ><em>Note: in PHP &ge; 7.1, the last command will emit 2 warnings. Some more edgy examples:</em>
+								<br/> <code>5 * 6</code> returns 30							
+								<br/> <code>'5' * '6'</code> returns 30
+								<br/> <code>'5' * '6k'</code> returns 30 (and emits 1 notice in PHP &ge; 7.1)
+								<br/> <code>'5m' * '6m'</code> returns 30 (and emits 2 notices in PHP &ge; 7.1)
+								<br/> <code>'yum' * '6'</code> returns 0 (and emits 1 warning in PHP &ge; 7.1)	
+								<br/> <code>'yum' * '6m'</code> returns 0 (and emits 1 notice and 1 warning in PHP &ge; 7.1)									
+							</footer>
+
+
 					</section>					
 
 					<section>
@@ -571,7 +581,7 @@ string</span></code></pre></div>
 									</li>
 								</ul>
 							</li>
-							<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> echo gettype('12'+'50k') . ('12'+'50k');
+							<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> echo gettype('12'+'50') . ('12'+'50');
 integer62</span></code></pre></div>
 						</ul>
 
@@ -585,8 +595,8 @@ integer62</span></code></pre></div>
 								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt;<span class="fragment"> $foo = '0';  // $foo is a string
 php &gt; $foo += 2;   // $foo is now an integer (2)
 php &gt; $foo = $foo + 1.3;  // $foo is now a float (3.3)
-php &gt; $foo = 5 + '10 Little Piggies'; // $foo is an integer (15)
-php &gt; $foo = 5 + '10 Small Pigs';     // $foo is an integer (15)</span></code></pre></div>
+php &gt; $foo .= ' piggies'; // $foo is now a string ('3.3 piggies')
+</span></code></pre></div>
 								<ul>
 									<li>Is it <a href="https://www.quora.com/What-is-type-juggling-on-PHP">a feature or a flaw</a>?</li>
 									<li>Use type casting ...</li>
@@ -1521,7 +1531,8 @@ zero, empty or n/a
 								</ul>
 							</li>
 						</ul>
-						<footer class="fragment">How to use: see <code>http://php.net/<em>nameofthefunction</em></code></footer>
+						<footer class="fragment">How to use: see <code>http://php.net/<em>nameofthefunction</em></code>
+						<br /><em>Note: in PHP &ge; 7.1, <strong>negative</strong> string offsets are counted from the end of the string</em></footer>
 					</section>
 
 					<section>
@@ -1652,7 +1663,7 @@ zero, empty or n/a
 						<h2>Custom functions (4)</h2>
 						<ul>
 							<li class="fragment">You cannot use <em>function overloading</em></li>
-							<li class="fragment">Meeting the number of arguments is not really a requirement
+							<li class="fragment">Passing too many arguments is just fine &hellip;
 								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend4.php">&lt;?php
 
 	// Our chopStringEnd function
@@ -1666,13 +1677,13 @@ zero, empty or n/a
 
 	// Our variables
 	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
-	$cutoffLength = 40;
-	$endStr	= '...';
 
 	// Go!
-	echo chopStringEnd($origStr, $cutoffLength, $endStr);</code></pre></div>
+	echo chopStringEnd($origStr, 40, '...');</code></pre></div>
 							</li>
 						</ul>
+						<footer class="fragment" style="line-height:1;">
+						<em>Note: passing <strong>too few</strong> arguments launches an <code>ArgumentCountError</code> (PHP &ge; 7.1) <br/> or a warning (PHP &lt; 7.1)</em></footer>
 					</section>
 
 					<section>
