@@ -728,23 +728,23 @@
 								Not really, as we've been cheating in the code examples by suppressing errors
 							</li>
 							<li class="fragment">
-								In reality there are a few pitfalls
+								In reality we still have 2 issues to fix
 								<ul>
 									<li class="fragment">Undefined Index</li>
 									<li class="fragment">XSS / <code>htmlentities()</code></li>
-									<li class="fragment"><del>Magic Quotes (pre PHP 5.4)</del></li>
 								</ul>
 							</li>
 					</section>
 
 					<section>
-						<h2>Pitfall: Undefined Index (1)</h2>
+						<h2>Issue #1: Undefined Index (1)</h2>
 						<ul>
 							<li class="fragment">
 								When not suppressing errors, with exactly the same PHP code, we get a rather nasty result
-								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/03/examples/persistency_05.php" data-overlay-height="600">&lt;form action=&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot; method=&quot;get&quot;&gt;
-	(same HTML code as before)
-&lt;/form&gt;</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/03/examples/persistency_05.php" data-overlay-height="600">	// Get variables
+	$name = $_GET['name'];
+	$pass = $_GET['pass'];
+	$cont = (int) $_GET['cont']; ...</code></pre></div>
 							</li>
 							<li class="fragment">
 								Problem: before submitting <code>$_GET</code> and <code>$_POST</code> are empty
@@ -761,7 +761,7 @@
 					</section>
 
 					<section>
-						<h2>Pitfall: Undefined Index (2)</h2>
+						<h2>Issue #1: Undefined Index (2)</h2>
 						<ul>
 							<li class="fragment">
 								Fix: check with <code>isset()</code> if a variable exists before using it
@@ -783,7 +783,7 @@
 					</section>
 
 					<section>
-						<h2>Pitfall: htmlentities/XSS (1)</h2>
+						<h2>Issue #2: htmlentities/XSS (1)</h2>
 						<ul>
 							<li class="fragment">
 								If we enter some HTML-looking text, we break the form
@@ -808,7 +808,7 @@
 					</section>
 
 					<section>
-						<h2>Pitfall: htmlentities/XSS (2)</h2>
+						<h2>Issue #2: htmlentities/XSS (2)</h2>
 						<ul>
 							<li class="fragment">
 								You must <strong>always</strong> use <code>htmlentities()</code> if you output/show user input in an HTML page
@@ -827,7 +827,7 @@
 								</ul>
 							</li>
 						</ul>
-						<footer class="fragment"><em style="color: #F55;">!! If you don't prevent XSS in the assignments or your exam, you will fail them !!</em></footer>
+						<footer class="fragment"><em style="color: #F55;">!! If you don't prevent XSS in the assignments, you will fail them !!</em></footer>
 					</section>
 
 <!-- 					<section>
@@ -884,7 +884,7 @@ $_COOKIE = array_map('stripPostSlashes', $_COOKIE);
 
 
 					<section>
-						<h2>Summary of both pitfalls</h2>
+						<h2>Summary</h2>
 
 						<ul>
 							<li class="fragment">
