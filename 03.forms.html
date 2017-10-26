@@ -476,7 +476,7 @@
 								</ul>
 							</li>
 							<li class="fragment">
-								Use <code>POST</code> for manipulative and sensitive actions
+								Use <code>POST</code> for manipulative* and sensitive actions
 								<ul>
 									<li class="fragment"><code>addComment()</code></li>
 									<li class="fragment"><code>deleteUser()</code></li>
@@ -490,6 +490,7 @@
 								Use <code>POST</code> for lengthy data <em>(Max length URLs: 2048 chars)</em>
 							</li>
 						</ul>
+						<footer class="fragment"><em>* actions that change data or that change the user's state</em></footer>
 					</section>
 
 					<section>
@@ -513,7 +514,7 @@
 											<li class="fragment"><code>GET</code> can be distributed/embedded (iframe)</li>
 											<li class="fragment"><code>GET</code> can be cached by webspiders</li>
 											<li class="fragment"><code>GET</code> remains visible in the browser history</li>
-											<li class="fragment"><code>GET</code> link can become invalid over time</li>
+											<li class="fragment"><code>GET</code> link can be prefetched by the browser</li>
 										</ul>
 									</li>
 									<li class="fragment">
