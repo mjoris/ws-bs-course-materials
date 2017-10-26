@@ -174,13 +174,13 @@
 						<h2>The protocol stack of web browsing</h2>
 						<ul>
 							<li class="fragment">
-								Which protocols are used when you browse to http://www.ikdoeict.be/ ?
+								Which protocols are used when you browse to https://www.ikdoeict.be/ ?
 							</li>
 
 
 								<figure class="fragment zoomable-20">
 									<img src="assets/02/HttpLayers.PNG" alt="HTTP(S) layers" title="HTTP(S) layers" height="200"  />
-									<figcaption>HTTP(S) layers, taken from http://mcheepati.blogspot.be/2012/03/in-which-layer-http-request-works-and.html</figcaption>
+									<figcaption>HTTP(S) layers, taken from https://mcheepati.blogspot.be/2012/03/in-which-layer-http-request-works-and.html</figcaption>
 								</figure>
 
 							<li class="fragment" style="font-size: 80%">
@@ -392,7 +392,7 @@
 					</section>
 
 
-					<section>
+					<!--section>
 						<h2>Sniffers</h2>
 						<ul>
 							<li class="fragment">
@@ -412,17 +412,17 @@
 								</ul>
 							</li>
 						</ul>
-					</section>
+					</section-->
 
 					<section>
 						<h2>Demo time!</h2>
 						<div class="fragment">
 							<p>
-								Let's use <a href="http://www.charlesproxy.com/">Charles</a> to analyze a visit to <a href="http://www.ikdoeict.be/">http://www.ikdoeict.be/</a> and thereby study the HTTP protocol which is defined in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">RFC 2616</a>
+								Let's use <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading">Chrome DevTools's network tab</a> to analyze a visit to <a href="https://www.ikdoeict.be/">https://www.ikdoeict.be/</a> and thereby study the HTTP protocol which is defined in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">RFC 2616</a>
 							</p>
 							<p>
 								<figure class="zoomable-15">
-									<img src="assets/02/charles.png" alt="Charles Web Debugging Proxy" title="Charles Web Debugging Proxy" height="342" class="noborder" />
+									<img src="assets/02/devtools.png" alt="Chrome DevTools's network tab" title="Chrome DevTools's network taging Proxy" height="342" class="noborder" />
 								</figure>
 							</p>
 						</div>
@@ -432,7 +432,7 @@
 						<h2>Request format (1)</h2>
 						<div class="fragment" style="text-align: center;">
 							<figure>
-								<img src="assets/02/charles-request.png" alt="Charles example: google.be: Request" title="Charles example: www.ikdoeict.be: Request" width="700" class="noborder" />
+								<img src="assets/02/devtools-requesth.png" alt="DevTools example: ikdoeict.be: Request" title="DevTools example: www.ikdoeict.be: Request" width="700" class="noborder" />
 							</figure>
 						</div>
 					</section>
@@ -493,7 +493,7 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 						<h2>Response format (1)</h2>
 						<div class="fragment" style="text-align: center;">
 							<figure>
-								<img src="assets/02/charles-response.png" alt="Charles example: google.be: Response" title="Charles example: www.ikdoeict.be: Response" width="700" class="noborder" />
+								<img src="assets/02/devtools-responseh.png" alt="DevTools example: ikdoeict.be: Response" title="DevTools example: www.ikdoeict.be: Response" width="700" class="noborder" />
 							</figure>
 						</div>
 					</section>
@@ -588,7 +588,7 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 						</ul>
 						<div class="fragment" style="text-align: center;">
 							<figure class="zoomable-15">
-								<img src="assets/02/charles-request-2.png" alt="Charles example: www.ikdoeict.be: Requesting other files" title="Charles example: www.ikdoeict.be: Requesting other files" width="500" class="noborder" />
+								<img src="assets/02/devtools-next.png" alt="DevTools example: www.ikdoeict.be: Requesting other files" title="DevTools example: www.ikdoeict.be: Requesting other files" width="500" class="noborder" />
 							</figure>
 						</div>
 					</section>
@@ -674,13 +674,14 @@ Content-Type: text/html</code></pre></div>
 							<li class="fragment" style="margin-top: 1em;">
 								By default, the http protocol is used
 								<ul>
-									<li>Typing in <code>www.ikdoeict.be/</code> is the same as <code>http://www.ikdoeict.be/</code></li>
+									<li>The URL <code>www.ikdoeict.be/</code> stands for <code>http://www.ikdoeict.be/</code></li>
+									<li>Nowadays, most often the webserver is configured such that the user is redirected to the secure version of the URL: <code>https://www.ikdoeict.be/</code> which is a good thing </li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								By default, port <code>80</code> (http) or <code>443</code> (https) is used
 								<ul>
-									<li>If the server is running on a different port, speficy it after the hostname separated by a colon <code>http://www.ikdoeict.be:8080/</code></li>
+									<li>If the server is running on a different port, specify it after the hostname separated by a colon <code>http://www.ikdoeict.be:8080/</code></li>
 								<ul>
 							</li>
 						</ul>
@@ -740,75 +741,39 @@ Content-Type: text/html</code></pre></div>
 					</section>
 
 					<section>
-						<h2>Example: ASP Page (1)</h2>
-
-						<ul>
-							<li class="fragment">
-								Consider this code
-								<div class="fragment"><pre class="bigger"><code class="language-asp">&lt;!DOCTYPE html&gt;
+						<h2>Demo: PHP page</h2>
+							<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/03/examples/html_and_php.php">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;title&gt;Sample ASP Page&lt;/title&gt;
+    &lt;title&gt;Combining HTML and PHP&lt;/title&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;%
-
-    Response.Write &quot;&lt;Hello, I am an ASP script!&quot;;
-
-%&gt;
+	&lt;p&gt;I am HTML&lt;/p&gt;
+	&lt;?php echo '&lt;p&gt;I am HTML, generated by PHP&lt;/p&gt;'; ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre></div>
-							</li>
+						<ul style="font-size: 75%;">
+							<li class="fragment">File opened directly from disk by browser: it remains unparsed</li>
+							<li class="fragment">A <a href="assets/03/examples/html_and_php.php" target="_blank">PHP file served by the webserver</a> is parsed before being sent to the client</li>
 						</ul>
 					</section>
 
-					<section>
-						<h2>Example: ASP Page (2)</h2>
-
-						<ul>
-							<li class="fragment">
-								Opened directly in browser via <em>File &gt; Open...</em>
-							</li>
-						</ul>
-						<div class="fragment" style="text-align: center;">
-							<figure class="zoomable-15">
-								<img src="assets/02/asp-filesystem.png" alt="A .asp file opened directly by the browser" title="A .asp file opened directly by the browser" width="500" />
-							</figure>
-						</div>
-						<p class="fragment warning" style="font-size: 75%; margin-top: 1em;">If you open a file directly from disk, it remains unparsed!</p>
-					</section>
-
-					<section>
-						<h2>Example: ASP Page (3)</h2>
-
-						<ul>
-							<li class="fragment">
-								Opened via a webserver
-							</li>
-						</ul>
-						<div class="fragment" style="text-align: center;">
-							<figure class="zoomable-15">
-								<img src="assets/02/asp-webserver.png" alt="A .asp file served by the webserver to the browser" title="A .asp file served by the webserver to the browser" width="500" />
-							</figure>
-						</div>
-						<p class="fragment warning" style="font-size: 75%; margin-top: 1em;">A file served by the webserver is parsed before being sent to the client</p>
-					</section>
 
 					<section>
 						<h2>Parsing Files (1)</h2>
 						<div style="text-align: center;">
 							<figure class="zoomable-20">
-								<img src="assets/02/parsing.png" alt="Parsing schematic" title="Parsing schematic" width="400" style="background: #fff;" />
+								<img src="assets/02/parsing2.png" alt="Parsing schematic" title="Parsing schematic" width="400" style="background: #fff;" />
 								<figcaption>Parsing schematic</figcaption>
 							</figure>
 						</div>
-						<ul>
+						<ul style="font-size: 90%;">
 							<li class="fragment">
-								The webserver is configured to have an ASP <strong>interpreter</strong> (<em>asp.dll</em>) <strong>parse</strong> any files ending in <code>.asp</code>.
+								The webserver is configured to have an PHP <strong>interpreter</strong> <strong>parse</strong> any files ending in <code>.php</code>.
 							</li>
 							<li class="fragment">
-								The interpreter converts the ASP code to text, which is then served to the client.
+								The interpreter converts the PHP code to text, which is then served to the client.
 								<ul>
 									<li>And if that text happens to be anything HTML-like &hellip;</li>
 								</ul>
@@ -833,17 +798,6 @@ Content-Type: text/html</code></pre></div>
 						</ul>
 					</section>
 
-					<section>
-						<h2>What to choose?</h2>
-
-						<div class="fragment" style="text-align: center;">
-							<figure>
-								<img src="assets/02/candy.jpg" title="" alt="" width="600" />
-							</figure>
-							<p class="fragment">... but we'll choose <img src="assets/02/php-logo@2x-white.png" height="36" class="noborder" style="position: relative; top: 8px;" /> ;-)</p>
-						</div>
-
-					</section>
 
 				</section>
 				
@@ -1037,7 +991,6 @@ Content-Type: text/html</code></pre></div>
 						<h2>Sources</h2>
 						<ul>
 							<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</a></li>
-							<li><a href="http://www.123rf.com/photo_3469538_coloured-candy-choice.html">http://www.123rf.com/photo_3469538_coloured-candy-choice.html</a></li>
 						</ul>
 					</section>
 				</section>
