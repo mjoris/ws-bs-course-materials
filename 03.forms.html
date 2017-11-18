@@ -1088,7 +1088,7 @@ $_COOKIE = array_map('stripPostSlashes', $_COOKIE);
 		$allOk = true;
 
 		// name not set, or empty
-		if (trim($name) == '') {
+		if (trim($name) === '') {
 			$msgName = 'Please enter your name';
 			$allOk = false;
 		}
