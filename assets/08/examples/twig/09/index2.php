@@ -9,7 +9,7 @@
 	$twig = new Twig_Environment($loader);
 
 	// load template
-	$tpl = $twig->loadTemplate('main2.twig');
+	$tpl = $twig->load('main2.twig');
 
 	// render template with our data
 	echo $tpl->render(array(

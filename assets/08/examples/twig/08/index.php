@@ -16,7 +16,7 @@
 	);
 
 	// load template
-	$tpl = $twig->loadTemplate('main.twig');
+	$tpl = $twig->load('main.twig');
 
 	// render template with our data
 	echo $tpl->render(array(
