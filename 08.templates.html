@@ -384,8 +384,9 @@ class Template {
 								PHP Templating Library
 								<ul>
 									<li>= Set of classes to working with templates</li>
-									<li>Website: <a href="http://twig.sensiolabs.org/">http://twig.sensiolabs.org/</a></li>
-									<li>Documentation: <a href="http://twig.sensiolabs.org/documentation">http://twig.sensiolabs.org/documentation</a></li>
+									<li>Website: <a href="https://twig.symfony.com/">https://twig.symfony.com/</a></li>
+									<li>Documentation: <a href="https://twig.symfony.com/doc/1.x/">https://twig.symfony.com/doc/1.x/</a></li>
+									<li>Developed by: <a href="https://sensiolabs.com/en">SensioLabs</a></li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
@@ -404,16 +405,16 @@ class Template {
 
 						<ol>
 							<li class="fragment">
-								Download Twig from <a href="https://github.com/twigphp/Twig/tags">https://github.com/twigphp/Twig/tags</a>
+								Download Twig <u>version 1.x</u> from <a href="https://github.com/twigphp/Twig/tags">https://github.com/twigphp/Twig/tags</a>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Place the <code>Twig</code> folder from the <code>.zip</code> into the <code>includes/</code> folder of your project
+								Extract the <code>Twig-1.x.x/lib/Twig</code> folder from the <code>.zip</code> into the <code>includes/</code> folder of your project
 								<div style="text-align: center;"><figure class="zoomable-20"><img src="assets/08/twig-ondisk.jpg" width="200" alt="" title="" /><figcaption>Twig on disk</figcaption></figure></div>
 							</li>
 						</ol>
 
 
-						<footer class="fragment"><em>Note: In <a href="http://github.com/mjoris/wd-bd-course-materials">Web Development</a> we'll learn how to include Twig using Composer</em></footer>
+						<footer class="fragment"><em>Note: In <a href="http://github.com/mjoris/wd-sd-course-materials">Web Development</a> we'll learn how to include Twig using Composer</em></footer>
 					</section>
 
 					<section>
@@ -439,7 +440,7 @@ $twig = new Twig_Environment($loader);</code></pre>
 							</li>
 						</ol>
 
-						<footer class="fragment"><em>Note: In <a href="http://bramus.github.io/ws2-sws-course-materials/">Webscripting2</a> we'll talk about autoloaders and PSR-0 in detail</em></footer>
+						<footer class="fragment"><em>Note: In <a href="http://github.com/mjoris/wd-sd-course-materials">Web Development</a> we'll talk about autoloaders and PSR-0 in detail</em></footer>
 					</section>
 
 					<section>
@@ -461,7 +462,7 @@ $twig = new Twig_Environment($loader);</code></pre>
 								The PHP code is quite similar
 								<pre class="bigger"><code class="language-php" data-overlay-example="assets/08/examples/twig/04/index.php">// Assuming we've already included and bootstrapped Twig
 
-$tpl = $twig->loadTemplate('main.twig');
+$tpl = $twig->load('main.twig');
 echo $tpl->render(array(
 	'title' => $title,
 	'user' => $userName,
@@ -485,7 +486,7 @@ echo $tpl->render(array(
 								Wrap template comments between <code>{# </code> and <code> #}</code> inside your <code>.twig</code> file.
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Example: <code>{# I am a template comment! #}</code><small><a href="http://twig.sensiolabs.org/doc/templates.html#comments">&#9873;</a></small>
+								Example: <code>{# I am a template comment! #}</code><small><a href="https://twig.symfony.com/doc/1.x/templates.html#comments">&#9873;</a></small>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Template comments won't be rendered, not even in HTML comments.
@@ -499,22 +500,22 @@ echo $tpl->render(array(
 							<li class="fragment">
 								Use a <code>|</code> followed by a <em>filter</em> in the template to modify a parameter before it is displayed
 								<ul>
-									<li class="fragment">Example: <code>{{ firstname|upper }}</code><small><a href="http://twig.sensiolabs.org/doc/filters/upper.html">&#9873;</a></small> will render <code>firstname</code> in uppercase.</li>
-									<li class="fragment">List of filters: <a href="http://twig.sensiolabs.org/doc/filters/index.html">http://twig.sensiolabs.org/doc/filters/index.html</a></li>
+									<li class="fragment">Example: <code>{{ firstname|upper }}</code><small><a href="https://twig.symfony.com/doc/1.x//filters/upper.html">&#9873;</a></small> will render <code>firstname</code> in uppercase.</li>
+									<li class="fragment">List of filters: <a href="https://twig.symfony.com/doc/1.x/filters/index.html">https://twig.symfony.com/doc/1.x/filters/index.html</a></li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Filters can be combined: <code>{{ firstname|upper|reverse }}</code>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Filters can accept arguments: <code>{{ firstname|slice(0,4) }}</code><small><a href="http://twig.sensiolabs.org/doc/filters/slice.html">&#9873;</a></small>
+								Filters can accept arguments: <code>{{ firstname|slice(0,4) }}</code><small><a href="https://twig.symfony.com/doc/1.x/filters/slice.html">&#9873;</a></small>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Default filter applied: <code>escape</code><small><a href="http://twig.sensiolabs.org/doc/filters/escape.html">&#9873;</a></small> <em>(aliased to <code>e</code>)</em>
+								Default filter applied: <code>escape</code><small><a href="https://twig.symfony.com/doc/1.x/filters/escape.html">&#9873;</a></small> <em>(aliased to <code>e</code>)</em>
 								<ul>
 									<li>Escapes the parameter to prevent XSS</li>
 									<li>
-										Use <code>raw</code><small><a href="http://twig.sensiolabs.org/doc/filters/raw.html">&#9873;</a></small> filter to show a variable unaltered
+										Use <code>raw</code><small><a href="https://twig.symfony.com/doc/1.x/filters/raw.html">&#9873;</a></small> filter to show a variable unaltered
 									</li>
 								</ul>
 							</li>
@@ -538,7 +539,7 @@ echo $tpl->render(array(
 ));</code></pre>
 							</li>
 						</ul>
-						<p class="fragment" style="margin-top: 1em;">Full list of filters: <a href="http://twig.sensiolabs.org/doc/filters/index.html">http://twig.sensiolabs.org/doc/filters/index.html</a></p>
+						<p class="fragment" style="margin-top: 1em;">Full list of filters: <a href="https://twig.symfony.com/doc/1.x/filters/index.html">https://twig.symfony.com/doc/1.x/filters/index.html</a></p>
 					</section>
 
 					<section>
@@ -556,7 +557,7 @@ $user = array(
 );
 
 // load template
-$tpl = $twig->loadTemplate('main.twig');
+$tpl = $twig->load('main.twig');
 
 // render template with our data
 echo $tpl->render(array(
@@ -600,7 +601,7 @@ echo $tpl-&gt;render(array(
 						<h2>Multi-Dimensional Assoc. Arrays (2)</h2>
 						<ul>
 							<li class="fragment">
-							 	&hellip; just use <code>for</code><small><a href="http://twig.sensiolabs.org/doc/tags/for.html">&#9873;</a></small> and <code>if</code><small><a href="http://twig.sensiolabs.org/doc/tags/if.html">&#9873;</a></small> tags in your template
+							 	&hellip; just use <code>for</code><small><a href="https://twig.symfony.com/doc/1.x/tags/for.html">&#9873;</a></small> and <code>if</code><small><a href="https://twig.symfony.com/doc/1.x/tags/if.html">&#9873;</a></small> tags in your template
 
 								<pre class="bigger"><code class="language-html dontrun"  data-overlay-example="assets/08/examples/twig/07/index.php">{% for colleague in colleagues %}
 &lt;h3&gt;
@@ -650,7 +651,7 @@ echo $tpl-&gt;render(array(
 						<h2>More Array goodiness (1)</h2>
 						<ul>
 							<li class="fragment">
-								Looping the array <code>$courses</code> using <code>for-else-endfor</code><small><a href="http://twig.sensiolabs.org/doc/tags/for.html#the-else-clause">&#9873;</a></small>
+								Looping the array <code>$courses</code> using <code>for-else-endfor</code><small><a href="https://twig.symfony.com/doc/1.x/tags/for.html#the-else-clause">&#9873;</a></small>
 
 								<div class="columns">
 									<div class="column column-12">
@@ -674,7 +675,7 @@ echo $tpl-&gt;render(array(
 								</div>
 								<br style="clear: both;" />
 							</li>
-							<li class="fragment">Iterating the keys<small><a href="http://twig.sensiolabs.org/doc/tags/for.html#iterating-over-keys">&#9873;</a></small> / keys &amp; values<small><a href="http://twig.sensiolabs.org/doc/tags/for.html#iterating-over-keys-and-values">&#9873;</a></small>:
+							<li class="fragment">Iterating the keys<small><a href="https://twig.symfony.com/doc/1.x/tags/for.html#iterating-over-keys">&#9873;</a></small> / keys &amp; values<small><a href="https://twig.symfony.com/doc/1.x/tags/for.html#iterating-over-keys-and-values">&#9873;</a></small>:
 								<div class="columns">
 									<div class="column column-12">
 										<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/08/examples/twig/08/index.php">&lt;ul&gt;
@@ -703,7 +704,7 @@ echo $tpl-&gt;render(array(
 						<h2>More Array goodiness (2)</h2>
 						<ul>
 							<li class="fragment">
-								Use the <code>loop</code> variable<small><a href="http://twig.sensiolabs.org/doc/tags/for.html#the-loop-variable">&#9873;</a></small> inside iterations:
+								Use the <code>loop</code> variable<small><a href="https://twig.symfony.com/doc/1.x/tags/for.html#the-loop-variable">&#9873;</a></small> inside iterations:
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/08/examples/twig/08/index.php">&lt;ul&gt;
 {% for val in courses %}
 	&lt;li&gt;
@@ -740,7 +741,7 @@ echo $tpl-&gt;render(array(
 						<h2>Configuring Twig</h2>
 						<ul>
 							<li class="fragment">
-								Twig can be configured during its bootstrapping phase<small><a href="http://twig.sensiolabs.org/doc/api.html#environment-options">&#9873;</a></small>
+								Twig can be configured during its bootstrapping phase<small><a href="https://twig.symfony.com/doc/1.x/api.html#environment-options">&#9873;</a></small>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
 								Example: enable caching
@@ -750,7 +751,7 @@ $twig = new Twig_Environment($loader, array(
 	'auto_reload' =&gt; true // set to false on production
 ));</code></pre>
 								<ul>
-									<li>When caching is enabled, Twig will save compiled PHP code (<a href="http://twig.sensiolabs.org/doc/internals.html#the-compiler">example</a>) of the template for faster use</li>
+									<li>When caching is enabled, Twig will save compiled PHP code (<a href="https://twig.symfony.com/doc/1.x/internals.html#the-compiler">example</a>) of the template for faster use</li>
 								</ul>
 
 							</li>
@@ -760,7 +761,7 @@ $twig = new Twig_Environment($loader, array(
 					<section>
 						<h2>Template Inheritance (1)</h2>
 						<ul>
-							<li class="fragment">Twig supports template inheritance<small><a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">&#9873;</a></small></li>
+							<li class="fragment">Twig supports template inheritance<small><a href="https://twig.symfony.com/doc/1.x/templates.html#template-inheritance">&#9873;</a></small></li>
 							<li class="fragment" style="margin-top: 1em;">Use case: Have a parent <code>layout.twig</code> and extend it per page in your project</li>
 						</ul>
 					</section>
@@ -769,7 +770,7 @@ $twig = new Twig_Environment($loader, array(
 						<h2>Template Inheritance (2)</h2>
 						<ol>
 							<li class="fragment">
-								Define a template as usual, with some <em>blocks</em> in
+								Define a template as usual, with some <em>blocks</em> in it
 								<pre class="bigger"><code class="language-html dontrun">&lt;h1&gt;{{ pageTitle }}&lt;/h1&gt;
 &lt;main&gt;
 	{% block pageContent %}
@@ -784,7 +785,7 @@ $twig = new Twig_Environment($loader, array(
 								Define a second template named <code>main.twig</code>
 								<ul>
 									<li>
-										Make it extend the first template (<code>layout.twig</code>) using <code>extends</code><small><a href="http://twig.sensiolabs.org/doc/tags/extends.html">&#9873;</a></small>
+										Make it extend the first template (<code>layout.twig</code>) using <code>extends</code><small><a href="https://twig.symfony.com/doc/1.x/tags/extends.html">&#9873;</a></small>
 									</li>
 									<li>
 										If necessary, overwrite some blocks from the first template.
@@ -808,7 +809,7 @@ $twig = new Twig_Environment($loader, array(
 								<ul>
 									<li>The result is a merge between the first and second template</li>
 								</ul>
-								<pre class="bigger"><code class="language-php" data-overlay-example="assets/08/examples/twig/09/index.php">$tpl = $twig->loadTemplate('main.twig');
+								<pre class="bigger"><code class="language-php" data-overlay-example="assets/08/examples/twig/09/index.php">$tpl = $twig->load('main.twig');
 echo $tpl->render(array(
 	'pageTitle' =&gt; 'Template Inheritance'
 ));</code></pre>
@@ -820,13 +821,13 @@ echo $tpl->render(array(
 						<h2>Template Inheritance (4)</h2>
 						<ul>
 							<li class="fragment">
-								Override variables of the parent template from within the child template using <code>set</code><small><a href="http://twig.sensiolabs.org/doc/tags/set.html">&#9873;</a></small> in Twig
+								Override variables of the parent template from within the child template using <code>set</code><small><a href="https://twig.symfony.com/doc/1.x/tags/set.html">&#9873;</a></small> in Twig
 								<pre class="bigger"><code class="language-html dontrun" data-overlay-example="assets/08/examples/twig/09/index2.php">{% extends 'layout.twig' %}
 
 {% set pageTitle = pageTitle|replace({'e': 'a'}) ~ ' (Manipulated)' %}</code></pre>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Output the parent block using <code>parent()</code><small><a href="http://twig.sensiolabs.org/doc/functions/parent.html">&#9873;</a></small>
+								Output the parent block using <code>parent()</code><small><a href="https://twig.symfony.com/doc/1.x/functions/parent.html">&#9873;</a></small>
 								<pre class="bigger"><code class="language-html dontrun">{% extends 'layout.twig' %}
 
 {% block pageStyle %}
@@ -842,7 +843,7 @@ echo $tpl->render(array(
 						<h2>Including other templates</h2>
 						<ul>
 							<li class="fragment">
-								It's also possible to include other templates, using <code>include</code><small><a href="http://twig.sensiolabs.org/doc/tags/include.html">&#9873;</a></small>. Principle is the same as PHP's <code>include()</code><small><a href="http://www.php.net/include">&#9873;</a></small>
+								It's also possible to include other templates, using <code>include</code><small><a href="https://twig.symfony.com/doc/1.x/tags/include.html">&#9873;</a></small>. Same principle as PHP's <code>include()</code><small><a href="http://www.php.net/include">&#9873;</a></small>
 								<pre class="bigger"><code class="language-html dontrun">{% include 'sidebar.twig' %}</code></pre>
 							</li>
 						</ul>
@@ -859,14 +860,14 @@ echo $tpl->render(array(
 							<li class="fragment">
 								We've only touched base here, there's lots more functionality in Twig
 								<ul>
-									<li class="fragment">Explore the <a href="http://twig.sensiolabs.org/doc/filters/index.html">full list of filters</a></li>
-									<li class="fragment">Next to <code>parent()</code> Twig sports <a href="http://twig.sensiolabs.org/doc/functions/index.html">some other handy functions</a></li>
-									<li class="fragment">Next to <code>if</code>, <code>for</code>, <code>block</code> and <code>set</code> there are <a href="http://twig.sensiolabs.org/doc/tags/index.html">lots more tags available in Twig</a></li>
-									<li class="fragment">Twig has some <a href="http://twig.sensiolabs.org/doc/tests/index.html">built-in tests</a> you can use on variables</li>
+									<li class="fragment">Explore the <a href="https://twig.symfony.com/doc/1.x/filters/index.html">full list of filters</a></li>
+									<li class="fragment">Next to <code>parent()</code> Twig supports <a href="https://twig.symfony.com/doc/1.x/functions/index.html">some other handy functions</a></li>
+									<li class="fragment">Next to <code>if</code>, <code>for</code>, <code>block</code> and <code>set</code> there are <a href="https://twig.symfony.com/doc/1.x/tags/index.html">lots more tags available in Twig</a></li>
+									<li class="fragment">Twig has some <a href="https://twig.symfony.com/doc/1.x/tests/index.html">built-in tests</a> you can use on variables</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								You can <a href="http://twig.sensiolabs.org/doc/advanced.html">extend Twig with your own filters, tests, tags, and functions</a>
+								You can <a href="https://twig.symfony.com/doc/1.x/advanced.html">extend Twig with your own filters, tests, tags, and functions</a>
 							</li>
 						</ul>
 					</section>
