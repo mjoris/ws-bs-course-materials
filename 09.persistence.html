@@ -981,6 +981,7 @@ session.cookie_lifetime = 0
 
 // expiry time of session variables (in seconds)
 session.gc_maxlifetime = 1800</code></pre>
+					<footer class="fragment" style="line-height: 1;"><em>Indeed, session variables are stored in files on the web server (1 file per session). This file is locked by <code>session_start();</code> which could result in <a href="https://ma.ttias.be/php-session-locking-prevent-sessions-blocking-in-requests/">concurrency problems</a>.</em></footer>
 					</section>
 
 					<section>
