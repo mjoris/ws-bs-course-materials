@@ -1,6 +1,6 @@
 # Serverside scripting Course Materials
 
-This collection of slides comprises the course materials of the Web scripting / Serverside scripting course, part of the [Professional Bachelor ICT](https://www.ikdoeict.be/) study programme, taught at [Odisee](https://www.odisee.be/), Ghent, Belgium.
+This collection of slides comprises the course materials of the Web scripting / Server-side scripting course, part of the [Professional Bachelor ICT](https://www.ikdoeict.be/) study programme, taught at [Odisee](https://www.odisee.be/), Ghent, Belgium.
 
 The materials have originally been developed by Bram(us) Van Damme who blogs over at [bram.us](https://www.bram.us/) and Twitters as [@bramus](https://twitter.com/bramus). These materials are authored by [Joris Maervoet](https://be.linkedin.com/in/jorismaervoet) in the present fork.
 
