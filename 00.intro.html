@@ -269,24 +269,25 @@
 
 					<section>
 						<h2>Technology</h2>
-						<ul>
+						<ul style="font-size: 85%">
 							<li class="fragment">
 								Technology
 								<ul>
 									<li>Scripting Language: PHP 7.2</li>
-									<li>Databaseserver: MySQL</li>
+									<li>Databaseserver: MySQL 5.7</li>
 									<li>Webserver: Apache or <a href="http://php.net/manual/en/features.commandline.webserver.php">PHP's built-in server</a></li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 0.5em;">
-								<a href="http://www.wampserver.com/en/">Wampserver</a> (Win) or <a href="http://www.mamp.info/en/">MAMP (Pro)</a> (OS X) recommended
+								Recommended software (one of the following)
 								<ul>
-									<li class="fragment">Follow <a href="http://helpdesk.ikdoeict.be/index.php?/Knowledgebase/Article/View/11/4/howto-installatieconfiguratie-van-software-wamplamp-stack">these instructions</a> to configure your install</li>
-									<li class="fragment">Make sure PHP version 7.x is selected in the WampManager menu</li>
-									<li class="fragment">Be sure to add the PHP binary to your system's <code>PATH</code> *
+									<li class="fragment">On Windows: <a href="http://wampserver.aviatechno.net/">Aviatechno's WampServer</a>
+										<br>PHP CLI*: Add <code>C:\wamp64\bin\php\<em>version</em>\</code> to <code>PATH</code> via Environment Variables</li>
+									<li class="fragment">On OSX: <a href="http://www.mamp.info/en/">MAMP (Pro)</a>
+										<br>PHP CLI*: Paste this on the Terminal: <br><code>echo 'export PATH=/Applications/MAMP/bin/php/php<em>version</em>/bin/:$PATH' &gt;&gt; ~/.bash_profile</code></li>
+									<li class="fragment">Even better: a virtual LAMP-environment with <a href="https://www.docker.com/products/docker-engine">Docker</a>
 										<ul>
-											<li>Windows: Add <code>C:\wamp64\bin\php\<em>version</em>\</code> to <code>PATH</code> via Computer Settings</li>
-											<li>OS X: Paste this on the Terminal: <code>echo 'export PATH=/Applications/MAMP/bin/php/php<em>version</em>/bin/:$PATH' &gt;&gt; ~/.bash_profile</code></li>
+											<li>More on this in the <a href="01.php.intro.html">PHP intro slides</a></li>
 										</ul>
 									</li>						
 								</ul>
@@ -331,7 +332,7 @@
 							<li class="fragment" style="margin-top: 0.5em;">
 								Course Materials
 								<ul>
-									<li>Available on <a href="https://github.com/mjoris/ws-ss-course-materials">GitHub</a> and <a href="https://ikdoeict.be/apps/leercentrum/courses/ws-ss-course-materials/">Leercentrum</a></li>
+									<li>Available on <a href="https://github.com/mjoris/ws-ss-course-materials">GitHub</a> and <a href="https://intern.ikdoeict.be/apps/leercentrum/courses/ws-ss-course-materials/">Leercentrum</a></li>
 									<li>Feel free to fork and commit improvements/additions</li>
 								</ul>
 							</li>
