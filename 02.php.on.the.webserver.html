@@ -418,7 +418,7 @@
 						<h2>Demo time!</h2>
 						<div class="fragment">
 							<p>
-								Let's use <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading">Chrome DevTools's network tab</a> to analyze a visit to <a href="https://www.ikdoeict.be/">https://www.ikdoeict.be/</a> and thereby study the HTTP protocol which is defined in <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">RFC 2616</a>
+								Let's use <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading">Chrome DevTools's network tab</a> to analyze a visit to <a href="https://www.ikdoeict.be/">https://www.ikdoeict.be/</a> and thereby study the HTTP protocol which is defined in <a href="https://tools.ietf.org/html/rfc7540">RFC 7540</a>
 							</p>
 							<p>
 								<figure class="zoomable-15">
@@ -431,7 +431,7 @@
 					<section>
 						<h2>Request format (1)</h2>
 						<div class="fragment" style="text-align: center;">
-							<figure>
+							<figure class="zoomable-15">
 								<img src="assets/02/devtools-requesth.png" alt="DevTools example: ikdoeict.be: Request" title="DevTools example: www.ikdoeict.be: Request" width="700" class="noborder" />
 							</figure>
 						</div>
@@ -455,7 +455,7 @@
 								<ol>
 									<li class="fragment">Method: <code>OPTIONS</code>, <code>GET</code>, <code>POST</code>, <code>HEAD</code>, <code>PUT</code>, <code>DELETE</code>, <code>TRACE</code>, or <code>CONNECT</code></li>
 									<li class="fragment">Request-URI: Requested page <em>(here <code>/</code>)</em></li>
-									<li class="fragment">HTTP version: always <code>HTTP/1.1</code>
+									<li class="fragment">HTTP version: here <code>HTTP/1.1</code>
 								</ol>
 							</li>
 						</ul>
@@ -492,7 +492,7 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 					<section>
 						<h2>Response format (1)</h2>
 						<div class="fragment" style="text-align: center;">
-							<figure>
+							<figure class="zoomable-15">
 								<img src="assets/02/devtools-responseh.png" alt="DevTools example: ikdoeict.be: Response" title="DevTools example: www.ikdoeict.be: Response" width="700" class="noborder" />
 							</figure>
 						</div>
@@ -594,30 +594,29 @@ Cookie: PREF=ID=39391363bc...xdN</code></pre></div>
 					</section>
 
 					<section>
-						<h2>If you're feeling geeky <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+						<h2>Meanwhile &hellip;</h2>
 						<ul>
 							<li class="fragment">
-								As the HTTP protocol runs over TCP and is plaintext, it's possible to <code>telnet</code> to a webserver
+								HTTP/2 is being widely adopted by browsers and servers
+								<ul>
+									<li class="fragment">
+										extending previous HTTP versions
+									</li>
+									<li class="fragment">
+										lowering <a href="https://developers.google.com/web/fundamentals/performance/http2/">the network latency</a>
+									</li>
+									<li>
+										<a href="https://www.phproundtable.com/episode/all-about-http2">maintaining</a> the way you handle requests/responses in PHP
+									</li>
 
-								<div class="fragment"><pre class="bigger"><code>bramus$ telnet www.ikdoeict.be 80
-Trying 178.18.22.176...
-Connected to www.ikdoeict.be.
-Escape character is '^]'.
-HEAD / HTTP/1.1
-Host: www.ikdoeict.be
-Content-Length: 8
 
-s=bramus</code></pre></div>
-								<div class="fragment"><pre class="bigger"><code>HTTP/1.1 200 OK
-Date: Sun, 29 Sep 2013 13:10:48 GMT
-Server: Apache/1.3.42 (Unix) mod_log_bytes/1.2 mod_bwlimited/1.4 mod_auth_passthrough/1.8 FrontPage/5.0.2.2635 mod_ssl/2.8.31 OpenSSL/0.9.7a
-Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-Expires: Thu, 19 Nov 1981 08:52:00 GMT
-Pragma: no-cache
-X-Powered-By: PHP/5.4.20
-Set-Cookie: PHPSESSID=7b25f....a52e67; path=/
-Content-Type: text/html</code></pre></div>
+								</ul>
+								<div class="fragment" style="text-align: center;">
+									<figure><img alt="HTTP/2 binary framing layer" src="assets/02/binary_framing_layer01.svg" width="500" class="noborder" ></figure>
+								</div>
 							</li>
+
+
 						</ul>
 					</section>
 
