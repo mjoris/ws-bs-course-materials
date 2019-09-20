@@ -63,7 +63,7 @@
 				<!-- 0 : Title -->
 				<section>
 					<section>
-						<h3 class="inverted">Server-side Webscripting <small>[OGI02L]</small></h3>
+						<h3 class="inverted">Server-side Webscripting</h3>
 						<h1>00.intro</h1>
 
 						<footer>
@@ -90,24 +90,30 @@
 						<ul>
 							<li class="fragment">Web Scripting = main course (OPO)
 							<li class="fragment" style="margin-top: 1em;">
-								Web Scripting = three sub-courses
+								Web Scripting = two sub-courses
 								<ul>
-									<li>OLA Web Scripting (Theorie) [JLW502] <small>no evaluation</small></li>
-									<li>OLA Client-side Scripting (Lab) [OGI02K]</li>
-									<li>OLA Server-side Scripting (Lab) [OGI02L]</li>
+									<li>First 6 weeks: Server-side Web Scripting (lectures and labs)</li>
+									<li>Last 6 weeks: Client-side Web Scripting (lectures and labs)</li>
+
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em;">
-								Web Scripting = 5 ECTS Credits
+								Web Scripting = 6 ECTS Credits
 								<ul>
 									<li>Equal distribution client-side/server-side</li>
+								</ul>
+							</li>
+							<li class="fragment" style="margin-top: 1em;">
+								No official sub-courses (OLAs) anymore
+								<ul>
+									<li>Arrangement <em>officieuze vrijstelling</em>: see Toledo</li>
 								</ul>
 							</li>
 						</ul>
 					</section>
 
 					<section>
-						<h2>Instructors</h2>
+						<h2>Instructors SSWS</h2>
 						<ul class="columns">
 							<li class="fragment column column-8" style="text-align: center; font-size: 20px; line-height: 100%;margin: 0 8.5%;">
 								<p><img src="assets/00/lecturer_joris.jpg" width="290" alt="Picture of Joris Maervoet" title="" style="border: 0px;"/></p>
@@ -120,21 +126,6 @@
 						</ul>
 					</section>
 
-					<section>
-						<h2>Timing</h2>
-						<ul>
-							<li class="fragment">
-								One semester = 12 weeks
-							</li>
-							<li class="fragment" style="margin-top: 1em;">
-								Two blocks
-								<ul>
-									<li>First 6 weeks = Client-side Scripting</li>
-									<li>Last 6 weeks = Server-side Scripting</li>
-								</ul>
-							</li>
-						</ul>
-					</section>
 
 				</section>
 
@@ -165,12 +156,16 @@
 											<li>Text styling &amp; Backgrounds</li>
 											<li>Box Model</li>
 											<li>Positioning with float/absolute/relative/fixed</li>
+											<li>Flexbox</li>
 											<li>&ldquo;New&rdquo; CSS3 features</li>
 										</ul>
 									</li>
 									<li class="fragment">
 										Developer Tools: Firefox <a href="https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector">Page Inspector</a>,
 										Chrome <a href="https://developer.chrome.com/devtools">DevTools</a> or alike</li>
+									<li class="fragment">
+										Knowing the <a href="https://www.codebyamir.com/blog/view-source-vs-inspect-element">difference</a> between the page source and the DOM
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -273,21 +268,21 @@
 							<li class="fragment">
 								Technology
 								<ul>
-									<li>Scripting Language: PHP 7.2</li>
+									<li>Scripting Language: PHP 7.3</li>
 									<li>Databaseserver: MySQL 5.7</li>
 									<li>Webserver: Apache or <a href="http://php.net/manual/en/features.commandline.webserver.php">PHP's built-in server</a></li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 0.5em;">
-								Recommended software (one of the following)
+								Recommended software: a *AMP-stack
 								<ul>
-									<li class="fragment">On Windows: <a href="http://wampserver.aviatechno.net/">Aviatechno's WampServer</a>
+									<li class="fragment">WAMP on Windows: <a href="http://wampserver.aviatechno.net/">Aviatechno's WampServer</a>
 										<br>PHP CLI*: Add <code>C:\wamp64\bin\php\<em>version</em>\</code> to <code>PATH</code> via Environment Variables</li>
-									<li class="fragment">On OSX: <a href="http://www.mamp.info/en/">MAMP (Pro)</a>
+									<li class="fragment"><a href="http://www.mamp.info/en/">MAMP</a> On OSX
 										<br>PHP CLI*: Paste this on the Terminal: <br><code>echo 'export PATH=/Applications/MAMP/bin/php/php<em>version</em>/bin/:$PATH' &gt;&gt; ~/.bash_profile</code></li>
 									<li class="fragment">Even better: a virtual LAMP-environment with <a href="https://www.docker.com/products/docker-engine">Docker</a>
 										<ul>
-											<li>More on this in the <a href="01.php.intro.html">PHP intro slides</a></li>
+											<li>We have prepared <a href="https://ikdoeict.freshdesk.com/support/solutions/articles/31000147164-virtuele-lamp-omgeving-in-docker">such an environment</a>, to be used in the Mac-lab</li>
 										</ul>
 									</li>						
 								</ul>
@@ -376,7 +371,7 @@ git pull</code></pre>
 					</section>
 
 					<section>
-						<h2>Evaluation</h2>
+						<h2>Evaluation <small>of the SSWS sub-course</small></h2>
 						<ul>
 							<li class="fragment">
 								Permanent (50%)
