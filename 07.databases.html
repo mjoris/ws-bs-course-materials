@@ -1325,7 +1325,7 @@ foreach ($comments as $c) {
 							<li class="fragment">
 								Use <code>password_hash()</code><small><a href="http://php.net/password_hash">&#9873;</a></small> and <code>password_verify()</code><small><a href="http://php.net/password_verify">&#9873;</a></small>
 								<ul>
-									<li class="fragment">Uses a strong one-way hashing algorithm</li>
+									<li class="fragment">Uses a strong one-way hashing algorithm (<a href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a>)</li>
 								</ul>
 							</li>
 							<li class="fragment" style="margin-top: 1em">
@@ -1341,7 +1341,7 @@ $encrypted = '$2y$10$Ae/ZoEnFze9SZKcgbNBluOObABeejekNoJ2iNmyf4QM5IYSIyzFPe';
 if (password_verify($pass, $encrypted)) { &hellip; }</code></pre>
 							</li>
 						</ul>
-						<footer class="fragment"><em>Note: these functions are new since PHP 5.5. When using 5.4, include <a href="https://github.com/ircmaxell/password_compat/blob/master/lib/password.php">this polyfill</a>.</em></footer>
+						<footer class="fragment" style="line-height: 1;">PHP&ge;7.3: full support for the even safer Argon2 algorithm<br/><code class="language-php">echo password_hash('bramus', PASSWORD_ARGON2ID);</code></footer>
 					</section>
 
 				</section>
