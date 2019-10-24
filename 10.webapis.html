@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Server-side Webscripting &mdash; 10.Web APIs</title>
+
+		<meta name="description" content="Webscripting1 &mdash; Server-side Webscripting &mdash; 10.Web APIs">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+
+		<style>
+			.columns .column {
+				float: left;
+				list-style: none;
+				margin: 0 0 12px 0;
+				padding: 0;
+			}
+
+			.column-12 {
+				width: 50%;
+				text-align: center;
+			}
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+
+			del code, code.nok {
+				color: #C55;
+			}
+
+			ins code, code.ok {
+				color: #5C5;
+			}
+
+			strong {
+				color: #553d00;
+				background: transparent url('assets/02/strong.png') no-repeat 50% 50%;
+				font-size: 80%;
+				padding: 0 4px;
+				font-family: palatino, times;
+				font-weight: 300;
+				font-style: italic;
+			}
+
+			#reveal section img.noborder {
+				background: transparent;
+				border: 0;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				-ms-box-shadow: none;
+				-o-box-shadow: none;
+				box-shadow: none;"
+			}
+
+			#reveal .hastooltip {
+				position: relative;
+			}
+
+			#reveal .hastooltip .tooltip {
+				position: absolute;
+				bottom: 5px;
+				right: 5px;
+				background-image: url('assets/comments.png');
+				background-position: bottom right;
+				background-repeat: no-repeat;
+				width: 60px;
+				height: 60px;
+				z-index: 110;
+			}
+
+			#reveal .tooltip div {
+				display: none;
+				position: absolute;
+				bottom: 30px;
+				right: 40px;
+				font-size: 50%;
+				line-height: 1.48;
+				min-width: 420px;
+				opacity: 0.9;
+				border: 2px solid #ccc;
+				padding: 20px;
+				background-color: #ffc;
+				background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+				background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+				background-image: -ms-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+				background-image: -o-linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+				background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,180,0));
+				border-radius: 4px;
+				box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+				text-shadow: 0 1px 0 rgba(255,255,255,.4);
+				color: #333;
+			}
+
+			#reveal .tooltip:hover div {
+				display: block;
+			}
+
+			#reveal .tooltip ul {
+				margin: 5px 5px 5px 15px;
+			}
+
+			#reveal .tooltip ul li {
+				margin-left: 10px;
+			}
+
+			#reveal .tooltip div *:last-child {
+				margin-bottom: 0;
+			}
+
+			@keyframes pizzapalace-cycle {
+			    0% { background-position: 0 0; }
+			    100% { background-position: -2290px 0; }
+			}
+
+			#pizzapalace-strip {
+				display: block;
+				width: 572px;
+				height: 526px;
+				background: transparent url(assets/09/pizzapalace-strip.png) no-repeat 0 0 !important;
+				background-size: 2308px 526px !important;
+				transform-origin: center top;
+				transform: scale(0.6);
+				top: -320px;
+				margin: 0 auto 0;
+				transition: all 0.25s;
+			}
+
+			#pizzapalace-strip:hover {
+				transform: scale(1);
+				top: -200px;
+				animation: pizzapalace-cycle 12s steps(4) infinite;
+			}
+
+			@keyframes colormysite-cycle {
+			    0% { background-position: 0 0; }
+			    100% { background-position: -1112px 0; }
+			}
+
+			#colormysite-strip {
+				display: block;
+				width: 556px;
+				height: 480px;
+				background: transparent url(assets/09/colormysite-strip.png) no-repeat 0 0 !important;
+				background-size: 1112px 480px !important;
+				transform-origin: center top;
+				transform: scale(0.6);
+				top: -120px;
+				margin: 0 auto 0;
+				transition: all 0.25s;
+			}
+
+			#colormysite-strip:hover {
+				transform: scale(1);
+				animation: colormysite-cycle 4s steps(2) infinite;
+			}
+
+			@keyframes login-cycle {
+			    0% { background-position: 0 0; }
+			    100% { background-position: -3395px 0; }
+			}
+
+			#login-strip {
+				display: block;
+				width: 580px;
+				height: 449px;
+				background: transparent url(assets/09/login-strip.png) no-repeat 0 0 !important;
+				background-size: 3395px 449px !important;
+				transform-origin: center top;
+				transform: scale(0.6);
+				top: -220px;
+				margin: 0 auto 0;
+				transition: all 0.25s;
+			}
+
+			#login-strip:hover {
+				top: -120px;
+				transform: scale(1);
+				animation: login-cycle 12s steps(6) infinite;
+			}
+
+			html, body {
+				background: #34afbd;
+				background: radial-gradient(ellipse at center, #34afbd 0%,#1c1e20 100%);
+				letter-spacing: 0em;
+			}
+
+			#reveal nav {
+				opacity: 0.3;
+				letter-spacing: -0.02em;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				<!-- 0 : Title -->
+				<section>
+
+					<section>
+						<h3 class="inverted">Server-side Webscripting</h3>
+						<h1>10.Web APIs</h1>
+
+						<footer>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (70&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (30&percnt;)</em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+							document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+						</script>
+					</section>
+
+				</section>
+
+
+				<!-- Introduction -->
+				<section>
+					<section>
+						<h2>Introduction</h2>
+					</section>
+
+					<section>
+						<h2>Recap: the webserver (1)</h2>
+						<ul>
+							<li class="fragment">
+								Webserver: a <em>program</em> processing HTTP requests and answering by HTTP responses
+							</li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                PHP scripts can generate any type of HTTP response dynamically
+                                <ul>
+                                    <li>HTTP body (content) not limited to HTML</li>
+                                    <li>HTTP head can be manipulated using functions like
+                                        <code>header()</code>
+                                        <small><a href="https://www.php.net/manual/en/function.header.php">⚑</a></small>
+                                    </li>
+                                </ul>
+                            </li>
+						</ul>
+					</section>
+
+                    <section>
+                        <h2>Recap: the webserver (2)</h2>
+                        <ul>
+                            <li class="fragment">
+                                Example: dynamic generation of a ZIP
+
+                                <div class="fragment">
+
+									<pre class="bigger"><code class="language-php" data-overlay-example="assets/10/examples/generate-zip.php">&lt;?php
+$zip = new ZipArchive();
+$zipFile = 'demo.zip';
+if ($zip->open($zipFile, ZipArchive::CREATE) === true) {
+    $iterator = new DirectoryIterator(__DIR__);
+    foreach ($iterator as $file) {
+        if ((!$file->isDir()) && ($file->getExtension() === 'php')) {
+            $zip->addFile($file);
+        }
+    }
+    $zip->close();
+
+    header('Content-Type: application/zip');
+    header('Content-Disposition: attachment; filename=' . $zipFile);
+    header('Content-Length: ' . filesize($zipFile));
+    readfile($zipFile);
+}
+//EOF</code></pre>
+
+                                </div>
+
+                            </li>
+                        </ul>
+                        <footer class="fragment" style="line-height: 100%">Note: it is not always safe to distribute your PHP files over the web server</footer>
+                    </section>
+
+					<section>
+						<h2>Recap: client-server architecture</h2>
+                        <p>
+                            <figure class="fragment zoomable-20">
+                                <img src="assets/10/1200px-Client-server-model.svg.png" alt="client-server model" title="client-server model" height="220"  />
+                            </figure>
+                        </p>
+						<ul style="font-size: 90%;">
+
+							<li class="fragment">
+								Clients of a web server? Not restricted to <em>browsers</em>.
+								<ul style="font-size: 70%;">
+									<li>web bots, crawlers</li>
+									<li>Android apps</li>
+                                    <li>the linux command <code>curl</code></li>
+                                    <li>a .net Form application</li>
+                                    <li>JavaScript-code</li>
+                                    <li>&hellip;</li>
+								</ul>
+							</li>
+                            <li class="fragment">
+                                The only restriction: they should talk over HTTP
+                            </li>
+						</ul>
+
+                    </section>
+                    <section>
+                        <h2>Wait a minute &hellip;</h2>
+                        <ul>
+                            <li class="fragment">
+                                JavaScript-code is executed in the browser. So what's the difference?
+                                <ul>
+                                    <li>the launch of HTTP request and the HTTP response handling is executed <em>from code</em>, and not initiated by the user </li>
+                                    <li>technically speaking, the communication is initiated by an instance of the JavaScript <code>XMLHttpRequest</code> object, and not by clicking an HTML-element</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Web APIs: the idea (1)</h2>
+                        <p>
+                            <figure class="fragment zoomable-20">
+                                <img src="assets/10/idea-restful.png" alt="Web APIs: the idea" title="Web APIs: the idea" height="250"  />
+                            </figure>
+                        </p>
+                        <ul style="font-size: 80%;">
+                            <li class="fragment">
+                                Provide a uniform (HTTP) interface for multiple types of clients
+                            </li>
+                            <li class="fragment">
+                                Typically, it provides CRUD operations on a database
+                            </li>
+                            <li class="fragment">
+                                Why?
+                                <ul>
+                                    <li>This an architectural pattern (a <em>good</em> practice)</li>
+                                    <li>Because of multiple security and technical issues, it is not common to provide access to the DBMS over the Internet, and it is often not possible to communicate directly to the DBMS from JS/mobile apps</li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Web APIs: the idea (2)</h2>
+                        <ul style="font-size: 90%;">
+                            <li class="fragment">
+                                Why?
+                                <ul>
+                                    <li>To enable others to build cool stuff on top of your platform/data </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <figure class="fragment">
+                            <img src="assets/10/BotanicallsSparkfunKit_jade1_800.jpg" alt="" title="" height="400" />
+                            <figcaption>Let your plants tell you via Twitter that they're thirsty with <a href="http://www.botanicalls.com/kits/">botanicalls</a></figcaption>
+                        </figure>
+                    </section>
+				</section>
+
+
+                <!-- 2 : RESTful Web APIs -->
+                <section>
+
+                    <section>
+                        <h2>RESTful Web APIs</h2>
+                    </section>
+
+
+                    <section>
+                        <h2>What's a Web API?</h2>
+                        <ul>
+                            <li class="fragment">
+                                API: Application Programming Interface
+                                <ul>
+                                    <li class="fragment">Abstract Interface to allow communication between software components</li>
+                                    <li class="fragment">eg. Photoshop has a JS based API to remotely control Photoshop</li>
+                                    <li class="fragment">eg. Browsers have an API that allow creation of extensions</li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 0.7em">
+                                Web API: an API offered on the web
+                                <ul>
+                                    <li class="fragment">Allow you to push/pull data to/from a web site</li>
+                                    <li class="fragment">Scripting language independent (PHP, ASP, RoR, ..)</li>
+                                    <li class="fragment">Sometimes referred to as a &ldquo;Web Service&rdquo; <em>(blame Microsoft)</em></li>
+                                    <li class="fragment">Implemented via JavaScript, XML-RPC, SOAP, REST, &hellip;</li>
+                                    <li class="fragment">Return formats JS, XML, HTML, plaintext, JSON(P), &hellip;</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+
+                    <section>
+                        <h2>What's REST?</h2>
+                        <ul>
+                            <li class="fragment">
+                                REST = REpresentational State Transfer
+                                <ul>
+                                    <li class="fragment">
+                                        Architectural style for distributed hypermedia systems <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">described</a> by Roy Fielding, in 2000
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                REST constraints <small style="background-color: #f00;border-radius: 10px;">FYI</small>
+                                <ol>
+                                    <li class="fragment">Client-server</li>
+                                    <li class="fragment">Stateless Server</li>
+                                    <li class="fragment">Cacheable</li>
+                                    <li class="fragment">
+                                        Uniform interface
+                                        <ol>
+                                            <li>Identification of resources <em>(URI)</em></li>
+                                            <li>Manipulation of resources through representations <em>(modify/delete)</em></li>
+                                            <li>Self-descriptive messages <em>(message and meta-data)</em></li>
+                                            <li>Hypermedia As The Engine Of Application State <em>(state transitions)</em></li>
+                                        </ol>
+                                    </li>
+                                    <li class="fragment">Layered System</li>
+                                    <li class="fragment">Code-On-Demand <em>(optional)</em></li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>RESTful Web API</h2>
+                        <ul>
+                            <li class="fragment">
+                                Web API that follows the REST constraints
+                            </li>
+                            <li class="fragment">
+                                Constraint #4 (Uniform interface) is the tricky one
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Why choose REST?</h2>
+                        <ul>
+                            <li class="fragment">As a consumer, it's easy to work with</li>
+                            <li class="fragment">As a developer, it's (fairly) easy to implement</li>
+                            <li class="fragment">It's well structured</li>
+                            <li class="fragment">
+                                It's popular
+                            </li>
+                        </ul>
+                    </section>
+
+                </section>
+
+
+                <!-- 3: -->
+                <section>
+                    <section>
+                        <h2>How to build a Web API</h2>
+                    </section>
+
+                    <section>
+                        <h2 style="font-size: 70px;">Sidenote: Richardson Maturity Model <small style="background-color: #f00;border-radius: 10px;">FYI</small></h2>
+                        <ul>
+                            <li class="fragment">
+                                Model that breaks down the principal elements of a REST approach in a few steps
+                            </li>
+                        </ul>
+                        <figure class="fragment">
+                            <img src="assets/10/The-Richardson-Maturity-Model-Nordic-APIs.png" alt="" title="" height="310" />
+                        </figure>
+                        <footer class="fragment" style="line-height: 1.2;"><em>We don't have the time and knowledge yet to build Web APIs that are fully REST compliant <br>We'll come back on this model in some other course &hellip;</em></footer>
+                    </section>
+
+                    <section>
+                        <h2>#1 We'll use JSON over HTTP</h2>
+
+                        <ul>
+                            <li class="fragment">
+                                Use HTTP as a transport mechanism
+                                <ul>
+                                    <li class="fragment">
+                                        The consumer of the Web API sends a request to a URI using a HTTP METHOD (e.g. <code>POST</code>)
+                                    </li>
+                                    <li class="fragment">
+                                        Based on the data in the querystring, the consumer receives some data
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                This data is formatted is JSON
+                                <ul>
+                                    <li class="fragment">
+                                        JSON is concise and quite readable too
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>API Call Example</h2>
+                        <ul>
+                            <li class="fragment">
+                                Do a <code>GET</code> request to <code>/api/lecturers.php</code> to get back a list of lecturers as the actual content
+                                <pre class="bigger"><code class="language-javascript dontrun" style="max-height: 380px; overflow: scroll;">{
+	&quot;lecturers&quot;:
+	[
+		{
+			&quot;id&quot;: 1,
+			&quot;name&quot;: &quot;Joris Maervoet&quot;
+		},
+		{
+			&quot;id&quot;: 2,
+			&quot;name&quot;: &quot;Pieter Van Peteghem&quot;
+		}
+	]
+}</code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section style="font-size: 90%;">
+                        <h2>#2 A uniform interface (1)</h2>
+                        <ul>
+                            <li><strong>Important:</strong> the next steps don't show the <em>best</em> way to do it, it's just the way <em>we</em> do</li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                Define one <code>.php</code> file per resource in a separate <code>api/</code> folder
+                                <ul>
+                                    <li class="fragment">Nouns are preferred over verbs</li>
+                                    <li class="fragment">Use plurals</li>
+                                    <li class="fragment">Use concrete, appropriate names that describe the resource</li>
+                                    <li class="fragment"><strong>be consistent</strong></li>
+                                </ul>
+                                <pre class="bigger"><code class="dontrun" style="max-height: 380px; overflow: scroll;">includes/
+api/
+api/lecturers.php
+api/courses.php</code></pre>
+                            </li>
+                        </ul>
+
+                    </section>
+
+                    <section>
+                        <h2>#2 A uniform interface (2)</h2>
+                        <ul>
+                            <li class="fragment">
+                                Use URL parameters when necessary
+                                <ul>
+                                    <li class="fragment"><strong>be consistent</strong></li>
+                                    <li class="fragment">pass an ID <code>api/lecturers.php?id=5</code></li>
+                                    <li class="fragment">pass a foreign key <code>api/lecturers.php?course=1</code></li>
+                                    <li class="fragment">filtering and sorting <code>api/lecturers.php?filter=foo&sort=asc</code></li>
+                                    <li>limiting fields <code>api/lecturers.php?fields=name,age</code></li>
+                                    <li>pagination (mandatory for huge resources) <code>api/lecturers.php?limit=10&offset=120</code></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </section>
+
+
+                    <section>
+                        <h2 style="font-size: 70px;">#3 HTTP Verbs &amp; HTTP Response Codes</h2>
+
+                        <ul>
+                            <li class="fragment">
+                                Don't limit yourself to <code>POST</code>, but use all HTTP verbs
+                                <ul>
+                                    <li class="fragment">e.g. <code>POST</code>, <code>GET</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>, &hellip;</li>
+                                    <li class="fragment">
+                                        Depending on the HTTP verb used, a specific action will be taken
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                When an action has been taken, correctly use the HTTP response codes
+                                <ul>
+                                    <li class="fragment">e.g. <code>404</code>, <code>500</code>, &hellip;</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <footer class="fragment">&rarr; In short: use HTTP to the fullest.</footer>
+                    </section>
+
+
+                    <section>
+                        <h2>HTTP Verbs</h2>
+                        <ul>
+                            <li class="fragment">
+                                HTTP Verbs = CRUD = Queries
+                                <ul>
+                                    <li class="fragment"><code>POST</code> = Create = <code>INSERT</code></li>
+                                    <li class="fragment"><code>GET</code> = Read = <code>SELECT</code></li>
+                                    <li class="fragment"><code>PUT</code> = Update = <code>UPDATE</code></li>
+                                    <li class="fragment"><code>PATCH</code> = Update = <code>UPDATE</code></li>
+                                    <li class="fragment"><code>DELETE</code> = Delete = <code>DELETE</code></li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 0.5em;">
+                                Examples
+                                <ul>
+                                    <li class="fragment"><code>POST /products.php</code> <em>(data via <code>$_POST</code>)</em></li>
+                                    <li class="fragment"><code>GET /products.php</code> or <code>GET /products.php?id=1234</code></li>
+                                    <li class="fragment"><code>PUT /products?id=1234</code> <em>(data via &ldquo;<code>$_PUT</code>&rdquo;)</em></li>
+                                    <li class="fragment"><code>DELETE /products?id=1234</code></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+
+                    <section>
+                        <h2>HTTP Verbs Sidenote: PATCH vs. PUT</h2>
+
+                        <ul>
+                            <li class="fragment">
+                                What's the difference?
+                                <ul>
+                                    <li class="fragment">
+                                        <code>PUT</code> = replace a resource entirely
+                                    </li>
+                                    <li class="fragment">
+                                        <code>PATCH</code> = partially replace a resource
+                                    </li>
+                                </ul>
+                            </li>
+                            <li style="margin-top: 1em" class="fragment">
+                                But ...
+                                <div class="fragment">
+                                    <blockquote style="width: 100%">The <code>PATCH</code> method applies <strong>a delta (diff)</strong> rather than replacing the entire resource. The request entity to <code>PATCH</code> is of a different content-type that the resource that is being modified. Instead of being an entire resource representation, it is a resource that describes changes to apply on a resource.</blockquote>
+                                    <p style="text-align: right; font-size: 50%;"><em>Source: <a href="http://williamdurand.fr/2014/02/14/please-do-not-patch-like-an-idiot/">Please don't patch like an idiot</a></em></p>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </section>
+
+                    <section>
+                        <h2>HTTP Status Codes (1)</h2>
+                        <ul>
+                            <li class="fragment">
+                                When accessing a resource, you'll get back the data, along with <a href="http://httpstatus.es/">an HTTP status code</a>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                General Codes (applicable to all verbs/resources) <small style="background-color: #f00;border-radius: 10px;">FYI</small>
+                                <ul>
+                                    <li class="fragment"><code>400 &mdash; Bad Request</code> <em>(e.g. Request Body is malformed / not parseable)</em></li>
+                                    <li class="fragment"><code>401 &mdash; Not Authorized</code> <em>(e.g. No API Key given)</em></li>
+                                    <li class="fragment"><code>405 &mdash; Method Not Allowed</code> <em>(e.g. wrong verb for resource)</em></li>
+                                    <li class="fragment"><code>415 &mdash; Unsupported Media Type</code></li>
+                                    <li class="fragment"><code>422 — Unprocessable Entity</code> (Validation Errors)</li>
+                                    <li class="fragment"><code>429 — Too Many Requests</code> (Rate Limiting)</li>
+                                    <li class="fragment"><code>500 &mdash; Internal Server Error</code> <em>(Developer screwed up ;))</em></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </section>
+
+                    <section>
+                        <h2>HTTP Status Codes (2)</h2>
+                        <ul>
+                            <li class="fragment">
+                                <code>GET</code> <small style="vertical-align: baseline;">(SQL SELECT)</small>
+                                <ul>
+                                    <li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+                                    <li class="fragment"><code>404 &mdash; Not Found</code> <em>(resource not found, not &ldquo;API not found&rdquo;)</em></li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                <code>POST</code> <small style="vertical-align: baseline;">(SQL INSERT)</small>
+                                <ul>
+                                    <li class="fragment"><code>201 &mdash; Created</code> <em>(=OK)</em></li>
+                                    <li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>HTTP Status Codes (3)</h2>
+                        <ul>
+                            <li class="fragment">
+                                <code>PUT</code> <small style="vertical-align: baseline;">(SQL UPDATE)</small>
+                                <ul>
+                                    <li class="fragment"><code>200 &mdash; OK</code> <em>(requested data sent via response body)</em></li>
+                                    <li class="fragment"><code>400 &mdash; Bad Request</code> <em>(Missing Parameters)</em></li>
+                                    <li class="fragment"><code>404 &mdash; Not Found</code></li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                <code>DELETE</code> <small style="vertical-align: baseline;">(SQL DELETE)</small>
+                                <ul>
+                                    <li class="fragment"><code>204 &mdash; No Content</code> <em>(=OK &mdash; Note: <strong>no</strong> response body sent!)</em></li>
+                                    <li class="fragment"><code>404 &mdash; Not Found</code></li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">
+                                Warning!
+                                <ul><li>HTTP Statuses 4XX and 5XX will invoke <code>$.ajax().error()</code> in jQuery!</li></ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>API Call Example (1)</h2>
+                        <ul>
+                            <li class="fragment">
+                                Do a <code>GET</code> request to <code>/api/lecturers.php</code> and get back an HTTP <code>200</code> status code and a list of lecturers as the content
+                                <pre class="bigger"><code class="language-javascript dontrun" style="max-height: 380px; overflow: scroll;">{
+	&quot;lecturers&quot;:
+	[
+		{
+			&quot;id&quot;: 1,
+			&quot;name&quot;: &quot;Joris Maervoet&quot;
+		},
+		{
+			&quot;id&quot;: 2,
+			&quot;name&quot;: &quot;Pieter Van Peteghem&quot;
+		}
+	]
+}</code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>API Call Example (2)</h2>
+                        <ul>
+                            <li class="fragment">
+                                Do a <code>POST</code> request to <code>/api/lecturers.php</code> with some data in <code>$_POST</code> to insert a new lecturer
+                                <ul>
+                                    <li class="fragment">Get back <code>201 &mdash; Created</code> if all OK</li>
+                                    <li class="fragment">Get back <code>400 &mdash; Bad Request</code> if parameters are missing</li>
+                                </ul>
+                            </li>
+                            <li class="fragment" style="margin-top: 0.8em;">
+                                Do a <code>PUT</code> request to <code>/api/lecturers.php?id=2</code> with some data in <code>$_PUT</code> to update a lecturer
+                                <ul>
+                                    <li class="fragment">Get back <code>200 &mdash; OK</code> if all OK</li>
+                                    <li class="fragment">Get back <code>400 &mdash; Bad Request</code> if parameters are missing</li>
+                                    <li class="fragment">Get back <code>404 &mdash; Not Found</code> if the lecturer does not exist</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+
+
+
+                    <section>
+                        <h2>#4 Media Types</h2>
+
+                        <ul>
+                            <li class="fragment">
+
+                                An API can support multiple hypermedia types
+                                <ul>
+                                    <li class="fragment">
+                                        The client indicates in an <code>Accept</code> header
+                                        <ul>
+                                            <li>e.g <code>Accept: application/collection+json</code></li>
+                                            <li>Conten negotiation e.g. <code>Accept: application/xml; q=0.8, application/json</code></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        &rarr; We'll just stick to JSON
+                                    </li>
+                                    <li>
+                                        The server indicates the type in a <code>Content-Type</code> header
+                                        <ul>
+                                            <li>e.g <code>Content-Type: application/json; charset=UTF-8</code></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                </section>
+
+
+
+
+
+                <!-- 3 : Web API example in PHP -->
+                <section>
+
+                    <section>
+                        <h2>Web API example in PHP</h2>
+                        <em>under construction</em>
+                    </section>
+
+
+
+                    <!--section>
+                        <h2>One more thing</h2>
+
+                        <ul>                            <li class="fragment" style="margin-top: 1em;">
+                            Recommended tool: <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en">Chrome Postman plugin</a>
+                            <div style="width: 350px; margin: 0.4em auto 0;"><iframe width="350" height="263" src="http://www.youtube.com/embed/VPLlkhhRMvQ" frameborder="0" allowfullscreen></iframe></div>
+                        </li>
+                            <li class="fragment">There's no such thing as <code>$_PUT</code>, you'll need to fake it</li>
+                        </ul>
+                        <div class="fragment">
+							<pre class="bigger"><code class="language-php">&lt;?php
+
+//&hellip;
+
+$router-&gt;put('/movies/\d+', function() {
+
+	// Fake $_PUT
+	$_PUT  = array();
+	parse_str(file_get_contents('php://input'), $_PUT);
+
+	// &hellip;
+
+});
+
+//&hellip;</code></pre>
+                        </div>
+                    </section-->
+
+                </section>
+
+                <!-- 5 : Consuming a Web API in JavaScript -->
+                <section>
+                    <section>
+                        <h2>Consuming a Web API in JavaScript</h2>
+                        <em>under construction</em>
+                    </section>
+
+                    <!--section>
+                        <h2>RESTful APIs in jQuery</h2>
+                        <ul>
+                            <li class="fragment">
+                                Since the API returns both OK and errorous HTTP status codes, you need to hook both <code>success</code> and <code>error</code> functions
+                                <div class="fragment"><pre class="bigger"><code class="language-javascript dontrun">$.ajax({
+	url : 'http://api.myapp.tld/',
+	type: 'get|post|put|delete',
+	dataType : 'json',
+	data: 'foo=bar'
+})
+.success(function(data, textStatus, jqXHR) {
+	if (data) {
+		// All OK and data returned (200, 201)
+	} else {
+		// All OK but no data returned (e.g. 204 after a DELETE)
+	}
+})
+.error(function(jqXHR, textStatus, errorThrown) {
+	var data = jqXHR.responseText ? JSON.parse(jqXHR.responseText) : {};
+	// Got a 400 (params), 401, 404, 405 (method), 500, or 501 (not impl)
+});</code></pre></div>
+                            </li>
+                        </ul>
+                        <footer class="fragment"><em>TIP: Since we include the status in the response, you can easily check it via </em><code>data.status.code</code></footer>
+                    </section-->
+
+                    <section>
+                        <h2>Same-origin policy</h2>
+                        <ul>
+                            <li>Same-origin policy: a script loaded from one origin can only access resources from the same origin
+                                <ul>
+                                    <li>Origin = protocol + host + port</li>
+                                    <li>Example: a script loaded from <code>https://www.ikdoeict.be</code>
+                                        <ul>
+                                            <li>cannot access the elements of an <code>&lt;iframe&gt;</code> from <code>https://kbctouch.kbc.be</code></li>
+                                            <li>can only consume a web API from that origin</li>
+                                        </ul>
+                                    </li>
+
+                                    <li>In most browsers even <code>localhost</code> and <code>127.0.0.1</code> do conflict</li>
+                                    <li>Reason: security</li>
+                                </ul>
+                            </li>
+                            <li style="margin-top: 0.5em;">
+                                Multiple techniques to relax this policy
+                                <ul>
+                                    <li><a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing (CORS)</a>: HTTP headers indicating whether an origin can be trusted</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                </section>
+
+
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="mailto:joris.maervoet@odisee.be">joris.maervoet@odisee.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+                            <!-- REST Intro -->
+                            <li><a href="http://en.wikipedia.org/wiki/Representational_state_transfer">http://en.wikipedia.org/wiki/Representational_state_transfer</a></li>
+                            <li><a href="http://www.slideshare.net/jmusser/pw-glue-conmay2010">http://www.slideshare.net/jmusser/pw-glue-conmay2010</a></li>
+                            <li><a href="http://www.slideshare.net/al3x/the-interaction-design-of-apis">http://www.slideshare.net/al3x/the-interaction-design-of-apis</a></li>
+
+                            <!-- REST URL Design -->
+                            <li><a href="http://www.slideshare.net/Wombert/phpjp-urls-rest">http://www.slideshare.net/Wombert/phpjp-urls-rest</a></li>
+                            <li><a href="http://www.slideshare.net/apigee/restful-api-design-second-edition">http://www.slideshare.net/apigee/restful-api-design-second-edition</a></li>
+                            <li><a href="http://restpatterns.org/HTTP_Status_Codes">http://restpatterns.org/HTTP_Status_Codes</a></li>
+                            <li><a href="http://httpstatus.es/">http://httpstatus.es/</a></li>
+                            <li><a href="http://restcookbook.com/">http://restcookbook.com/</a></li>
+                            <li><a href="http://barelyenough.org/blog/2008/05/versioning-rest-web-services/">http://barelyenough.org/blog/2008/05/versioning-rest-web-services/</a></li>
+
+                            <!-- HATEOAS -->
+                            <li><a href="http://en.wikipedia.org/wiki/HATEOAS">http://en.wikipedia.org/wiki/HATEOAS</a></li>
+                            <li><a href="http://martinfowler.com/articles/richardsonMaturityModel.html">http://martinfowler.com/articles/richardsonMaturityModel.html</a></li>
+                            <li><a href="http://www.smartjava.org/content/presentation-rest-hateoas">http://www.smartjava.org/content/presentation-rest-hateoas</a></li>
+                            <li><a href="http://www.infoq.com/articles/mark-baker-hypermedia">http://www.infoq.com/articles/mark-baker-hypermedia</a></li>
+
+                            <!-- REST in PHP -->
+                            <li><a href="http://www.recessframework.org/page/towards-restful-php-5-basic-tips">http://www.recessframework.org/page/towards-restful-php-5-basic-tips</a></li>
+                            <li><a href="http://www.gen-x-design.com/archives/create-a-rest-api-with-php/">http://www.gen-x-design.com/archives/create-a-rest-api-with-php/</a></li>
+
+                            <!-- Authentication -->
+                            <li><a href="http://en.wikipedia.org/wiki/Oauth">http://en.wikipedia.org/wiki/Oauth</a></li>
+                            <li><a href="http://www.slideshare.net/leahculver/oauth-open-api-authentication">http://www.slideshare.net/leahculver/oauth-open-api-authentication</a></li>
+
+						</ul>
+					</section>
+				</section>
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>
