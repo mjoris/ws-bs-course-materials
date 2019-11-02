@@ -225,7 +225,7 @@
 						<h1>10.Web APIs</h1>
 
 						<footer>
-							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (70&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (30&percnt;)</em>
+							<em>Course materials: <a href="http://www.bram.us/">Bram(us) Van Damme</a> (60&percnt;) and <a href="mailto:joris.maervoet@odisee.be">Joris Maervoet</a> (40&percnt;)</em>
 						</footer>
 						<script>
 							// Delicously hacky. Look away.
@@ -505,7 +505,7 @@ if ($zip->open($zipFile, ZipArchive::CREATE) === true) {
                                 </ul>
                             </li>
                             <li class="fragment" style="margin-top: 1em;">
-                                This data is formatted is JSON
+                                This data is formatted in JSON
                                 <ul>
                                     <li class="fragment">
                                         JSON is concise and quite readable too
@@ -778,8 +778,8 @@ api/courses.php</code></pre>
                                     <li class="fragment">
                                         The client indicates in an <code>Accept</code> header
                                         <ul>
-                                            <li>e.g <code>Accept: application/collection+json</code></li>
-                                            <li>Conten negotiation e.g. <code>Accept: application/xml; q=0.8, application/json</code></li>
+                                            <li>e.g <code>Accept: application/collection+json</code> <a href="https://github.com/collection-json/spec">(link)</a></li>
+                                            <li>Content negotiation e.g. <code>Accept: application/xml; q=0.8, application/json</code></li>
                                         </ul>
                                     </li>
 
@@ -809,38 +809,117 @@ api/courses.php</code></pre>
 
                     <section>
                         <h2>Web API example in PHP</h2>
-                        <em>under construction</em>
                     </section>
 
-
-
-                    <!--section>
-                        <h2>One more thing</h2>
-
-                        <ul>                            <li class="fragment" style="margin-top: 1em;">
-                            Recommended tool: <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en">Chrome Postman plugin</a>
-                            <div style="width: 350px; margin: 0.4em auto 0;"><iframe width="350" height="263" src="http://www.youtube.com/embed/VPLlkhhRMvQ" frameborder="0" allowfullscreen></iframe></div>
-                        </li>
-                            <li class="fragment">There's no such thing as <code>$_PUT</code>, you'll need to fake it</li>
+                    <section>
+                        <h2>Let's define a reusable class (1)</h2>
+                        <ul>
+                            <li class="fragment">Let's call this class <code>WebAPIEndpoint</code> an put in <code>includes/</code></li>
+                            <li class="fragment">
+                                Idea: create your own endpoint (e.g. <code>api/lecturers.php</code>) by
+                                <ol>
+                                    <li>extending <code>WebAPIEndpoint</code></li>
+                                    <li>implementing your own request handling methods such as <code>get()</code>, <code>put()</code>, &hellip;</li>
+                                    <li>creating an instance of the child class</li>
+                                    <li>calling the <code>run()</code> method</li>
+                                </ol>
+                            </li>
                         </ul>
-                        <div class="fragment">
-							<pre class="bigger"><code class="language-php">&lt;?php
+                    </section>
+                    <section>
+                        <h2>Let's define a reusable class (2)</h2>
+                        <pre class="bigger"><code class="language-php dontrun" style="max-height: 430px; overflow: scroll;font-size: 17px; line-height: 1;">&lt;?php
+abstract class WebAPIEndpoint
+{
+    public function run() {
 
-//&hellip;
+        // Identify the HTTP request method (GET, POST, PULL, ...)
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
 
-$router-&gt;put('/movies/\d+', function() {
+        // Parse the HTTP request body assuming it contains plain JSON
+        $httpBody = json_decode(file_get_contents('php://input'), true);
 
-	// Fake $_PUT
-	$_PUT  = array();
-	parse_str(file_get_contents('php://input'), $_PUT);
+        // Does an instance of this class contain a method called get(), post(), pull() ...?
+        if (method_exists($this, strtolower($httpMethod))) {
 
-	// &hellip;
+            // if so, call this method
+            $answer = call_user_func(array($this, strtolower($httpMethod)), $_GET, $httpBody);
+        } else {
 
-});
+            // HTTP response code 405 Method Not Allowed
+            http_response_code(405); // (http_response_code() supports any version of HTTP)
+            $answer = ['message' => 'HTTP request method ' .  $httpMethod . ' not allowed.'];
+        }
 
-//&hellip;</code></pre>
-                        </div>
-                    </section-->
+        // set the Content-type response header to JSON and encode the answer into JSON
+        header('Content-type: application/json; charset=UTF-8');
+        echo json_encode($answer);
+        exit;
+    }
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>A simple example</h2>
+                        <pre class="bigger"><code class="language-php dontrun" style="max-height: 430px; overflow: scroll;font-size: 17px; line-height: 1;">&lt;?php
+require_once '../includes/WebAPIEndpoint.php';
+
+class LecturersEndPoint extends WebAPIEndpoint {
+
+    private $lecturers = [1 =&gt; ['id' =&gt; 1, 'name' =&gt; 'Joris Maervoet'],
+                          2 =&gt; ['id' =&gt; 2, 'name' =&gt; 'Pieter Van Peteghem']];
+
+    protected function get($urlParams, $bodyParams) {
+        if (! isset($urlParams['id'])) {
+            return ['lecturers' =&gt; array_values($this-&gt;lecturers)];
+        }  else {
+            $id = $urlParams['id'];
+            if (array_key_exists($id, $this-&gt;lecturers)) {
+                return $this-&gt;lecturers[$id];
+            } else {
+                http_response_code(404); // 404 Not Found.
+                return ['message' =&gt; 'Lecturer not found.'];
+            }
+        }
+    }
+}
+
+$lep = new LecturersEndPoint();
+$lep-&gt;run();</code></pre>
+                    </section>
+                    <section>
+                        <h2>API testing tools</h2>
+
+                        <ul>
+                            <li class="fragment" style="margin-top: 1em;">
+                            Recommended tools: <a href="https://www.getpostman.com">Postman</a>, <a href="https://insomnia.rest/">Insomnia</a> REST client.
+
+
+
+                        </li>
+                            <li class="fragment" style="margin-top: 1em;">&rarr; Let's test our <code>api/lecturers.php</code> endpoint with Insomnia</li>
+                        </ul>
+                        <figure><img src="assets/10/insomnia-promo.png" alt="Insomnia screenshot" width="400"></figure>
+                    </section>
+
+                    <section>
+                        <h2>A more advanced example</h2>
+
+                        <ul>
+                            <li class="fragment">
+                               Typically, a web API provides CRUD operations on a database
+
+
+                            </li>
+                            <li class="fragment">
+                                Typically, all data in the HTTP request is controlled/validated
+                                thoroughly.
+
+
+                            </li>
+                            <li class="fragment" style="margin-top: 1em;">Import the database dump <code>demo-webapi.sql</code></li>
+                            <li class="fragment">&rarr; Let's have a look at <code>api/products.php</code></li>
+                        </ul>
+                    </section>
 
                 </section>
 
@@ -848,35 +927,36 @@ $router-&gt;put('/movies/\d+', function() {
                 <section>
                     <section>
                         <h2>Consuming a Web API in JavaScript</h2>
-                        <em>under construction</em>
                     </section>
 
-                    <!--section>
-                        <h2>RESTful APIs in jQuery</h2>
+                    <section>
+                        <h2>Consuming RESTful APIs</h2>
                         <ul>
                             <li class="fragment">
-                                Since the API returns both OK and errorous HTTP status codes, you need to hook both <code>success</code> and <code>error</code> functions
-                                <div class="fragment"><pre class="bigger"><code class="language-javascript dontrun">$.ajax({
-	url : 'http://api.myapp.tld/',
-	type: 'get|post|put|delete',
-	dataType : 'json',
-	data: 'foo=bar'
-})
-.success(function(data, textStatus, jqXHR) {
-	if (data) {
-		// All OK and data returned (200, 201)
-	} else {
-		// All OK but no data returned (e.g. 204 after a DELETE)
-	}
-})
-.error(function(jqXHR, textStatus, errorThrown) {
-	var data = jqXHR.responseText ? JSON.parse(jqXHR.responseText) : {};
-	// Got a 400 (params), 401, 404, 405 (method), 500, or 501 (not impl)
-});</code></pre></div>
+                                How to? See next weeks.
+                            </li>
+                            <li class="fragment">
+                                Have a look at <code>demo.html</code>
+                                <div class="fragment"><pre class="bigger"><code class="language-javascript dontrun" data-overlay-example="assets/10/examples/project-with-webapi/demo.html">        // wait till DOM is loaded
+        window.addEventListener('load', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'api/products.php');
+            xhr.send();
+
+            xhr.onload = function() {
+
+                if (xhr.status != 200) {
+                    alert( 'Error: ' + xhr.status);
+                    return;
+                }
+                var jsonResponse = JSON.parse(xhr.responseText);
+                jsonResponse.products.forEach(function (product, index) {
+                    document.body.innerHTML += '&lt;div class="card">&lt;div class="container">&lt;h4>' + product.title + '&lt;/h4>&lt;p>Price: ' + product.price + '&euro;&lt;/p>&lt;p>Stock quantity: ' + product.quantity + '&lt;/p>&lt;/div>&lt;/div>';
+                });
+            };</code></pre></div>
                             </li>
                         </ul>
-                        <footer class="fragment"><em>TIP: Since we include the status in the response, you can easily check it via </em><code>data.status.code</code></footer>
-                    </section-->
+                    </section>
 
                     <section>
                         <h2>Same-origin policy</h2>
@@ -949,6 +1029,10 @@ $router-&gt;put('/movies/\d+', function() {
                             <li><a href="http://en.wikipedia.org/wiki/Oauth">http://en.wikipedia.org/wiki/Oauth</a></li>
                             <li><a href="http://www.slideshare.net/leahculver/oauth-open-api-authentication">http://www.slideshare.net/leahculver/oauth-open-api-authentication</a></li>
 
+                            <!-- Update -->
+                            <li><a href="https://www.codeofaninja.com/2017/02/create-simple-rest-api-in-php.html">https://www.codeofaninja.com/2017/02/create-simple-rest-api-in-php.html</a></li>
+                            <li><a href="https://davisonpro.dev/how-to-create-an-advanced-php-rest-api/">https://davisonpro.dev/how-to-create-an-advanced-php-rest-api/</a></li>
+                            <li><a href="https://apisyouwonthate.com/blog/rest-and-hypermedia-in-2019">https://apisyouwonthate.com/blog/rest-and-hypermedia-in-2019</a></li>
 						</ul>
 					</section>
 				</section>
